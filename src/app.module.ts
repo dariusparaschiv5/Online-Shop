@@ -5,6 +5,7 @@ import { CustomersModule } from './customers/customers.module';
 import { ProductsModule } from './products/products.module';
 import { SharedModule } from './shared/shared.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Customer } from './customers/domain/customer';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'msgcsuser',
       password: 'msgcspass',
       database: 'msgcsdb',
-      entities: [],
+      entities: [Customer],
       synchronize: true,
     }),
     CustomersModule,
