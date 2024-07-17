@@ -5,10 +5,13 @@ import { CustomersModule } from './customers/customers.module';
 import { ProductsModule } from './products/products.module';
 import { SharedModule } from './shared/shared.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Customer } from './customers/domain/customer';
-import { Orders } from './orders/domain/orders';
-import { ProductCategory } from './products/domain/productCategory';
-import { Product } from './products/domain/product';
+import { Customer } from './customers/domain/customer.domain';
+import { Orders } from './orders/domain/orders.domain';
+import { ProductCategory } from './products/domain/productCategory.domain';
+import { Product } from './products/domain/product.domain';
+import { Location } from './products/domain/location.domain';
+import { Stock } from './products/domain/stock.domain';
+import { OrderDetail } from './orders/domain/order-detail.domain';
 
 @Module({
   imports: [
@@ -19,7 +22,15 @@ import { Product } from './products/domain/product';
       username: 'msgcsuser',
       password: 'msgcspass',
       database: 'msgcsdb',
-      entities: [Customer, Orders, ProductCategory, Product],
+      entities: [
+        Customer,
+        Orders,
+        ProductCategory,
+        Product,
+        Location,
+        OrderDetail,
+        Stock,
+      ],
       synchronize: true,
     }),
     CustomersModule,

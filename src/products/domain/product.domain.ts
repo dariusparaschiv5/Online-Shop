@@ -5,7 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { ProductCategory } from './productCategory';
+import { ProductCategory } from './productCategory.domain';
 
 @Entity()
 export class Product {
@@ -24,7 +24,7 @@ export class Product {
   })
   description: string;
 
-  @Column({ 
+  @Column({
     name: 'Price',
     type: 'decimal',
     precision: 10,
@@ -40,12 +40,18 @@ export class Product {
   weight: number;
 
   @Column({
+    name: 'Supplier',
+    default: 'supplier',
+  })
+  supplier: string;
+
+  @Column({
     name: 'ImageUrl',
     default: 'imageUrl',
   })
   imageUrl: string;
 
   @ManyToOne(() => ProductCategory, (category) => category.products)
-  @JoinColumn({ name: 'id' })
+  @JoinColumn({ name: 'ProductCategoryId' })
   category: ProductCategory;
 }

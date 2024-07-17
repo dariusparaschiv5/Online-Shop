@@ -1,4 +1,4 @@
-import { Customer } from 'src/customers/domain/customer';
+import { Customer } from 'src/customers/domain/customer.domain';
 import {
   Column,
   Entity,
@@ -43,6 +43,6 @@ export class Orders {
   streetAdress: string;
 
   @ManyToOne(() => Customer, (customer) => customer.orders)
-  @JoinColumn({ name: 'customer_id' })
+  @JoinColumn({ name: 'CustomerId' })
   customer: Customer;
 }
