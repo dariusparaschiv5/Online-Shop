@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Orders } from 'src/orders/domain/orders';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Customer {
@@ -7,22 +8,20 @@ export class Customer {
 
   @Column({
     name: 'FirstName',
-    nullable: false,
-    default: '',
+    default: 'firstName',
   })
   firstName: string;
 
   @Column({
     name: 'LastName',
-    nullable: false,
-    default: '',
+    default: 'lastName',
   })
   lastName: string;
 
   @Column({
     name: 'Username',
     nullable: false,
-    default: '',
+    default: 'username',
   })
   username: string;
 
@@ -35,8 +34,10 @@ export class Customer {
 
   @Column({
     name: 'EmailAdress',
-    nullable: false,
-    default: '',
+    default: 'emailAdress',
   })
   emailAdress: string;
+
+  @OneToMany(() => Orders, (orders) => orders.customer)
+  orders: Orders[];
 }
