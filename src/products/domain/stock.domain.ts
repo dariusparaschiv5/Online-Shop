@@ -10,9 +10,6 @@ import { Location } from './location.domain';
 
 @Entity()
 export class Stock {
-  @PrimaryGeneratedColumn('uuid', { name: 'Id' })
-  id: string;
-
   @PrimaryGeneratedColumn('uuid', { name: 'LocationId' })
   ordersId: string;
 
