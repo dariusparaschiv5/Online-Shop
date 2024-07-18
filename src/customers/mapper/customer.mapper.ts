@@ -9,7 +9,7 @@ export class CustomerMapper {
     const customer = new Customer();
     customer.firstName = createCustomerDTO.firstName;
     customer.lastName = createCustomerDTO.lastName;
-    customer.username = createCustomerDTO.lastName;
+    customer.username = createCustomerDTO.username;
     customer.password = createCustomerDTO.password;
     customer.emailAdress = createCustomerDTO.emailAdress;
     return customer;
@@ -19,8 +19,9 @@ export class CustomerMapper {
     const customerDTO = new CustomerDTO();
     customerDTO.firstName = customer.firstName;
     customerDTO.lastName = customer.lastName;
-    customer.username = customer.username;
-    customer.emailAdress = customer.emailAdress;
+    customerDTO.username = customer.username;
+    customerDTO.password = customer.password;
+    customerDTO.emailAdress = customer.emailAdress;
     return customerDTO;
   }
 }
