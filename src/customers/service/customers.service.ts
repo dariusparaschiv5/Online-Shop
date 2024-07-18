@@ -1,5 +1,5 @@
-import { Get, Injectable, Post } from '@nestjs/common';
-import { CustomersRepository } from '../repository/customer.repository';
+import { Injectable } from '@nestjs/common';
+import { CustomersRepository } from '../repository/customers.repository';
 import { CreateCustomerDTO } from '../dto/create-customer.dto';
 import { Customer } from '../domain/customer.domain';
 import { CustomerMapper } from '../mapper/customer.mapper';
@@ -12,7 +12,6 @@ export class CustomersService {
     private customerMapper: CustomerMapper,
   ) {}
 
-  @Post()
   async createCustomer(
     createCustomerDTO: CreateCustomerDTO,
   ): Promise<Customer> {
@@ -20,13 +19,11 @@ export class CustomersService {
     return this.customersRepository.create(customer);
   }
 
-  @Get()
   async findAllCustomers(): Promise<CustomerDTO[]> {
     const customers = await this.customersRepository.findAll();
     return customers.map((customer) => this.customerMapper.toDTO(customer));
   }
 
-  @Get(':id')
   async findCustomerById(id: string): Promise<CustomerDTO | null> {
     const customer = await this.customersRepository.findOne(id);
     return customer ? this.customerMapper.toDTO(customer) : null;
