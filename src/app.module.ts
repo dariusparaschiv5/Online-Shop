@@ -12,7 +12,6 @@ import { Product } from './products/domain/product.domain';
 import { Location } from './products/domain/location.domain';
 import { Stock } from './products/domain/stock.domain';
 import { OrderDetail } from './orders/domain/order-detail.domain';
-import { CustomersRepository } from './customers/repository/customer.repository';
 
 @Module({
   imports: [
@@ -40,6 +39,5 @@ import { CustomersRepository } from './customers/repository/customer.repository'
     SharedModule,
   ],
   controllers: [HealthController],
-  providers: [CustomersRepository],
 })
 export class AppModule {}
