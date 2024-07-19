@@ -7,7 +7,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ProductCategory } from '../domain/productCategory.domain';
+import { ProductCategory } from '../domain/product-category.domain';
 import { ProductCategoryDTO } from '../dto/product-category.dto';
 import { ProductCategoryMapper } from '../mapper/product-category.mapper';
 import { ProductCategoriesService } from '../service/product-categories.service';
@@ -22,7 +22,7 @@ export class ProductCategoriesController {
 
   @Post()
   async create(
-    @Body() createProductCategoryDTO: ProductCategoryDTO,
+    @Body() createProductCategoryDTO: CreateProductCategoryDTO,
   ): Promise<ProductCategory> {
     return this.productCategoryService.createProductCategory(
       this.productCategoryMapper.toDomain(createProductCategoryDTO),
@@ -30,27 +30,36 @@ export class ProductCategoriesController {
   }
 
   @Get()
-  async findAll() {
-    return this.productCategoryService.findAllProductCategories();
+  async findAll(): Promise<ProductCategoryDTO[]> {
+    const productCategories =
+      await this.productCategoryService.findAllProductCategories();
+    return productCategories.map((productCategory) =>
+      this.productCategoryMapper.toDTO(productCategory),
+    );
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string): Promise<ProductCategoryDTO | null> {
     const productCategory =
       await this.productCategoryService.findProductCategoryById(id);
-    return productCategory;
+    return this.productCategoryMapper.toDTO(productCategory);
   }
 
   @Put(':id')
   async updateProductCategory(
     @Param('id') id: string,
-    @Body() updateData: Partial<CreateProductCategoryDTO>,
-  ): Promise<ProductCategoryDTO> {
-    return this.productCategoryService.update(id, updateData);
+    @Body() newProductCategory: ProductCategoryDTO,
+  ): Promise<ProductCategory> {
+    const productCategory =
+      this.productCategoryMapper.toDomain(newProductCategory);
+    return this.productCategoryService.updateProductCategory(
+      id,
+      productCategory,
+    );
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return this.productCategoryService.remove(id);
+  async remove(@Param('id') id: string): Promise<void> {
+    return this.productCategoryService.removeProductCategory(id);
   }
 }

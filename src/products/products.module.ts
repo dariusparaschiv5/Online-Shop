@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProductCategory } from './domain/productCategory.domain';
+import { ProductCategory } from './domain/product-category.domain';
 import { Product } from './domain/product.domain';
 import { Stock } from './domain/stock.domain';
 import { Location } from './domain/location.domain';
@@ -8,6 +8,10 @@ import { ProductCategoriesRepository } from './repository/product-categories.rep
 import { ProductCategoryMapper } from './mapper/product-category.mapper';
 import { ProductCategoriesService } from './service/product-categories.service';
 import { ProductCategoriesController } from './controller/product-categories.controller';
+import { ProductRepository } from './repository/products.repository';
+import { ProductMapper } from './mapper/product.mapper';
+import { ProductsService } from './service/products.service';
+import { ProductsController } from './controller/products.controller';
 
 @Module({
   imports: [
@@ -17,7 +21,10 @@ import { ProductCategoriesController } from './controller/product-categories.con
     ProductCategoriesRepository,
     ProductCategoryMapper,
     ProductCategoriesService,
+    ProductRepository,
+    ProductMapper,
+    ProductsService,
   ],
-  controllers: [ProductCategoriesController],
+  controllers: [ProductCategoriesController, ProductsController],
 })
 export class ProductsModule {}

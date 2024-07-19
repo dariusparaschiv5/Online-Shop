@@ -1,56 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import { ProductCategoriesRepository } from '../repository/product-categories.repository';
-import { ProductCategoryMapper } from '../mapper/product-category.mapper';
-import { ProductCategory } from '../domain/productCategory.domain';
-import { CreateProductCategoryDTO } from '../dto/create-product-category.dto';
-import { ProductCategoryDTO } from '../dto/product-category.dto';
+import { ProductCategory } from '../domain/product-category.domain';
 
 @Injectable()
 export class ProductCategoriesService {
   constructor(
     private productCategoriesRepository: ProductCategoriesRepository,
-    private productCategoryMapper: ProductCategoryMapper,
   ) {}
 
-  async createProductCategory(
-    createProductCategoryDTO: CreateProductCategoryDTO,
-  ): Promise<ProductCategory> {
-    const productCategory = this.productCategoryMapper.toDomain(
-      createProductCategoryDTO,
-    );
+  createProductCategory(productCategory: ProductCategory) {
     return this.productCategoriesRepository.create(productCategory);
   }
 
-  async findAllProductCategories(): Promise<ProductCategoryDTO[]> {
-    const productCategories = await this.productCategoriesRepository.findAll();
-    return productCategories.map((productCategory) =>
-      this.productCategoryMapper.toDTO(productCategory),
-    );
+  findAllProductCategories() {
+    return this.productCategoriesRepository.findAll();
   }
 
-  async findProductCategoryById(
-    id: string,
-  ): Promise<ProductCategoryDTO | null> {
-    const productCategory = await this.productCategoriesRepository.findOne(id);
-    return productCategory
-      ? this.productCategoryMapper.toDTO(productCategory)
-      : null;
+  findProductCategoryById(id: string) {
+    return this.productCategoriesRepository.findOne(id);
   }
 
-  async update(
-    id: string,
-    updateData: Partial<CreateProductCategoryDTO>,
-  ): Promise<ProductCategoryDTO> {
-    const productCategory = await this.productCategoriesRepository.findOne(id);
+  updateProductCategory(id: string, newProductCategory: ProductCategory) {
+    const productCategory = this.productCategoriesRepository.findOne(id);
     if (!productCategory) {
-      throw new Error('The product has not been found.');
+      throw new Error('The product category has not been found.');
     }
-    const updatedProductCategory =
-      await this.productCategoriesRepository.update(id, updateData);
-    return this.productCategoryMapper.toDTO(updatedProductCategory);
+    return this.productCategoriesRepository.update(id, newProductCategory);
   }
 
-  async remove(id: string): Promise<void> {
-    await this.productCategoriesRepository.remove(id);
+  removeProductCategory(id: string) {
+    this.productCategoriesRepository.remove(id);
   }
 }

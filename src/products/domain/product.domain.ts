@@ -5,7 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { ProductCategory } from './productCategory.domain';
+import { ProductCategory } from './product-category.domain';
 
 @Entity()
 export class Product {

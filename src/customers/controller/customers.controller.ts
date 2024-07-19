@@ -3,6 +3,7 @@ import { CustomersService } from '../service/customers.service';
 import { CreateCustomerDTO } from '../dto/create-customer.dto';
 import { Customer } from '../domain/customer.domain';
 import { CustomerMapper } from '../mapper/customer.mapper';
+import { CustomerDTO } from '../dto/customer.dto';
 
 @Controller('customers')
 export class CustomersController {
@@ -21,13 +22,14 @@ export class CustomersController {
   }
 
   @Get()
-  async findAll() {
-    return this.customersService.findAllCustomers();
+  async findAll(): Promise<CustomerDTO[]> {
+    const customers = await this.customersService.findAllCustomers();
+    return customers.map((customer) => this.customerMapper.toDTO(customer));
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string): Promise<CustomerDTO | null> {
     const customer = await this.customersService.findCustomerById(id);
-    return customer;
+    return this.customerMapper.toDTO(customer);
   }
 }

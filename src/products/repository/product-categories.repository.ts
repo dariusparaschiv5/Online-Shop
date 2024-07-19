@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ProductCategory } from '../domain/productCategory.domain';
+import { ProductCategory } from '../domain/product-category.domain';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -10,29 +10,26 @@ export class ProductCategoriesRepository {
     private productCategoriesRepository: Repository<ProductCategory>,
   ) {}
 
-  create(productCategory: ProductCategory): Promise<ProductCategory> {
+  create(productCategory: ProductCategory) {
     return this.productCategoriesRepository.save(productCategory);
   }
 
-  findOne(id: string): Promise<ProductCategory | null> {
+  findOne(id: string) {
     return this.productCategoriesRepository.findOneBy({ id });
   }
 
-  findAll(): Promise<ProductCategory[]> {
+  findAll() {
     return this.productCategoriesRepository.find();
   }
 
-  update(
-    id: string,
-    updateData: Partial<ProductCategory>,
-  ): Promise<ProductCategory> {
-    return this.productCategoriesRepository.save({
-      ...updateData,
-      id: id,
-    });
+  async update(id: string, productCategory: ProductCategory) {
+    const newProductCategory: ProductCategory =
+      await this.productCategoriesRepository.findOneBy({ id });
+    Object.assign(newProductCategory, productCategory);
+    return this.productCategoriesRepository.save(newProductCategory);
   }
 
-  async remove(id: string): Promise<void> {
-    await this.productCategoriesRepository.delete(id);
+  remove(id: string) {
+    this.productCategoriesRepository.delete(id);
   }
 }

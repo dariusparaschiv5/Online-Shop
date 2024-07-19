@@ -6,8 +6,8 @@ import { ProductsModule } from './products/products.module';
 import { SharedModule } from './shared/shared.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Customer } from './customers/domain/customer.domain';
-import { Orders } from './orders/domain/orders.domain';
-import { ProductCategory } from './products/domain/productCategory.domain';
+import { Order } from './orders/domain/order.domain';
+import { ProductCategory } from './products/domain/product-category.domain';
 import { Product } from './products/domain/product.domain';
 import { Location } from './products/domain/location.domain';
 import { Stock } from './products/domain/stock.domain';
@@ -24,7 +24,7 @@ import { OrderDetail } from './orders/domain/order-detail.domain';
       database: 'msgcsdb',
       entities: [
         Customer,
-        Orders,
+        Order,
         ProductCategory,
         Product,
         Location,

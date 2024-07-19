@@ -1,4 +1,4 @@
-import { Orders } from 'src/orders/domain/orders.domain';
+import { Order } from 'src/orders/domain/order.domain';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -38,6 +38,6 @@ export class Customer {
   })
   emailAdress: string;
 
-  @OneToMany(() => Orders, (orders) => orders.customer)
-  orders: Orders[];
+  @OneToMany(() => Order, (order) => order.customer)
+  orders: Order[];
 }

@@ -10,11 +10,11 @@ export class CustomersRepository {
     private customersRepository: Repository<Customer>,
   ) {}
 
-  create(customer: Customer): Promise<Customer> {
+  create(customer: Customer) {
     return this.customersRepository.save(customer);
   }
 
-  findOne(id: string): Promise<Customer | null> {
+  findOne(id: string) {
     return this.customersRepository.findOneBy({ id });
   }
 
@@ -22,7 +22,7 @@ export class CustomersRepository {
     return this.customersRepository.find();
   }
 
-  update(id: string, updateData: Partial<Customer>): Promise<Customer> {
+  update(id: string, updateData: Partial<Customer>) {
     return this.customersRepository.save({
       ...updateData,
       id: id,

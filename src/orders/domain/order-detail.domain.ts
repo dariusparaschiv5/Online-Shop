@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Orders } from './orders.domain';
+import { Order } from './order.domain';
 import { Location } from 'src/products/domain/location.domain';
 
 @Entity()
@@ -23,9 +23,9 @@ export class OrderDetail {
   })
   quantity: number;
 
-  @ManyToOne(() => Orders, (orders) => orders.id)
+  @ManyToOne(() => Order, (orders) => orders.id)
   @JoinColumn({ name: 'OrdersId' })
-  order: Orders;
+  order: Order;
 
   @ManyToOne(() => Product, (product) => product.id)
   @JoinColumn({ name: 'ProductId' })
