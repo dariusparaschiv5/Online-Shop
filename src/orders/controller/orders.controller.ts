@@ -39,14 +39,14 @@ export class OrdersController {
     return this.orderMapper.toDTO(order);
   }
 
-  // @Put(':id')
-  // async updateOrder(
-  //   @Param('id') id: string,
-  //   @Body() newOrder: OrderDTO,
-  // ): Promise<Order> {
-  //   const order = this.orderMapper.toDomain(newOrder);
-  //   return this.ordersService.updateOrder(id, order);
-  // }
+  @Put(':id')
+  async updateOrder(
+    @Param('id') id: string,
+    @Body() newOrder: CreateOrderDTO,
+  ): Promise<Order> {
+    const order = this.orderMapper.toDomain(newOrder);
+    return this.ordersService.updateOrder(id, order);
+  }
 
   @Delete(':id')
   async remove(@Param('id') id: string): Promise<void> {

@@ -42,14 +42,14 @@ export class ProductsController {
     return this.productMapper.toDTO(product);
   }
 
-  // @Put(':id')
-  // async updateProduct(
-  //   @Param('id') id: string,
-  //   @Body() newProduct: ProductDTO,
-  // ): Promise<Product> {
-  //   const product = this.productMapper.toDomain(newProduct);
-  //   return this.productService.updateProduct(id, product);
-  // }
+  @Put(':id')
+  async updateProduct(
+    @Param('id') id: string,
+    @Body() newProduct: CreateProductDTO,
+  ): Promise<Product> {
+    const product = this.productMapper.toDomain(newProduct);
+    return this.productService.updateProduct(id, product);
+  }
 
   @Delete(':id')
   async remove(@Param('id') id: string): Promise<void> {
