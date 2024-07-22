@@ -10,7 +10,6 @@ import {
 import { ProductsService } from '../service/products.service';
 import { ProductMapper } from '../mapper/product.mapper';
 import { CreateProductDTO } from '../dto/create-product.dto';
-import { Product } from '../domain/product.domain';
 import { ProductDTO } from '../dto/product.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -28,7 +27,9 @@ export class ProductsController {
     description: 'The product has been successfully created.',
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-  async create(@Body() createProductDTO: CreateProductDTO): Promise<Product> {
+  async create(
+    @Body() createProductDTO: CreateProductDTO,
+  ): Promise<ProductDTO> {
     return this.productsService.createProduct(
       this.productMapper.toDomain(createProductDTO),
     );
@@ -61,7 +62,7 @@ export class ProductsController {
   async updateProduct(
     @Param('id') id: string,
     @Body() newProduct: CreateProductDTO,
-  ): Promise<Product> {
+  ): Promise<ProductDTO> {
     const product = this.productMapper.toDomain(newProduct);
     return this.productsService.updateProduct(id, product);
   }

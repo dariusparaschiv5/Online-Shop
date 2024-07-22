@@ -7,7 +7,6 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ProductCategory } from '../domain/product-category.domain';
 import { ProductCategoryDTO } from '../dto/product-category.dto';
 import { ProductCategoryMapper } from '../mapper/product-category.mapper';
 import { ProductCategoriesService } from '../service/product-categories.service';
@@ -30,7 +29,7 @@ export class ProductCategoriesController {
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async create(
     @Body() createProductCategoryDTO: CreateProductCategoryDTO,
-  ): Promise<ProductCategory> {
+  ): Promise<ProductCategoryDTO> {
     return this.productCategoryService.createProductCategory(
       this.productCategoryMapper.toDomain(createProductCategoryDTO),
     );
@@ -73,7 +72,7 @@ export class ProductCategoriesController {
   async updateProductCategory(
     @Param('id') id: string,
     @Body() newProductCategory: ProductCategoryDTO,
-  ): Promise<ProductCategory> {
+  ): Promise<ProductCategoryDTO> {
     const productCategory =
       this.productCategoryMapper.toDomain(newProductCategory);
     return this.productCategoryService.updateProductCategory(

@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { OrderMapper } from '../mapper/order.mapper';
 import { OrderService } from '../service/orders.service';
-import { Order } from '../domain/order.domain';
 import { CreateOrderDTO } from '../dto/create-order.dto';
 import { OrderDTO } from '../dto/order.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -28,7 +27,7 @@ export class OrdersController {
     description: 'The order has been successfully created.',
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-  async create(@Body() createOrderDTO: CreateOrderDTO): Promise<Order> {
+  async create(@Body() createOrderDTO: CreateOrderDTO): Promise<OrderDTO> {
     return this.ordersService.createOrder(
       this.orderMapper.toDomain(createOrderDTO),
     );
@@ -61,7 +60,7 @@ export class OrdersController {
   async updateOrder(
     @Param('id') id: string,
     @Body() newOrder: CreateOrderDTO,
-  ): Promise<Order> {
+  ): Promise<OrderDTO> {
     const order = this.orderMapper.toDomain(newOrder);
     return this.ordersService.updateOrder(id, order);
   }
