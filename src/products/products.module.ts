@@ -12,6 +12,10 @@ import { ProductRepository } from './repository/products.repository';
 import { ProductMapper } from './mapper/product.mapper';
 import { ProductsService } from './service/products.service';
 import { ProductsController } from './controller/products.controller';
+import { StocksRepository } from './repository/stocks.repository';
+import { StockMapper } from './mapper/stock.mapper';
+import { StocksService } from './service/stocks.service';
+import { StocksController } from './controller/stocks.controller';
 
 @Module({
   imports: [
@@ -24,7 +28,14 @@ import { ProductsController } from './controller/products.controller';
     ProductRepository,
     ProductMapper,
     ProductsService,
+    StocksRepository,
+    StockMapper,
+    StocksService,
   ],
-  controllers: [ProductCategoriesController, ProductsController],
+  controllers: [
+    ProductCategoriesController,
+    ProductsController,
+    StocksController,
+  ],
 })
 export class ProductsModule {}

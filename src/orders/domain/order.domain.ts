@@ -4,8 +4,10 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { OrderDetail } from './order-detail.domain';
 
 @Entity()
 export class Order {
@@ -19,30 +21,33 @@ export class Order {
   createdAt: Date;
 
   @Column({
-    name: 'Adress.Country',
+    name: 'Address.Country',
     default: 'country',
   })
   country: string;
 
   @Column({
-    name: 'Adress.City',
+    name: 'Address.City',
     default: 'city',
   })
   city: string;
 
   @Column({
-    name: 'Adress.County',
+    name: 'Address.County',
     default: 'county',
   })
   county: string;
 
   @Column({
-    name: 'Adress.StreetAdress',
-    default: 'streetAdress',
+    name: 'Address.StreetAdress',
+    default: 'streetAddress',
   })
   streetAdress: string;
 
   @ManyToOne(() => Customer, (customer) => customer.orders)
   @JoinColumn({ name: 'CustomerId' })
   customer: Customer;
+
+  @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.product)
+  orderDetails: OrderDetail[];
 }

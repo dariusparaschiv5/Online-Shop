@@ -22,6 +22,8 @@ export class OrdersController {
 
   @Post()
   async create(@Body() createOrderDTO: CreateOrderDTO): Promise<Order> {
+    console.log(11);
+    console.log(this.orderMapper.toDomain(createOrderDTO));
     return this.ordersService.createOrder(
       this.orderMapper.toDomain(createOrderDTO),
     );

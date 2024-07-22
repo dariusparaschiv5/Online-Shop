@@ -1,36 +1,31 @@
-import { Product } from 'src/products/domain/product.domain';
 import {
-  Column,
   Entity,
-  JoinColumn,
-  ManyToOne,
   PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import { Order } from './order.domain';
+import { Product } from 'src/products/domain/product.domain';
 import { Location } from 'src/products/domain/location.domain';
 
 @Entity()
 export class OrderDetail {
-  @PrimaryGeneratedColumn('uuid', { name: 'OrdersId' })
-  ordersId: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @PrimaryGeneratedColumn('uuid', { name: 'ProductId' })
-  productId: string;
-
-  @Column({
-    name: 'Quantity',
-    default: 0,
-  })
-  quantity: number;
-
-  @ManyToOne(() => Order, (orders) => orders.id)
-  @JoinColumn({ name: 'OrdersId' })
+  @ManyToOne(() => Order, (order) => order.orderDetails)
+  @JoinColumn({ name: 'ordersId' })
   order: Order;
 
-  @ManyToOne(() => Product, (product) => product.id)
-  @JoinColumn({ name: 'ProductId' })
+  @ManyToOne(() => Product, (product) => product.orderDetails)
+  @JoinColumn({ name: 'productId' })
   product: Product;
 
-  @ManyToOne(() => Location, (location) => location.id)
+  @ManyToOne(() => Location, (location) => location.orderDetails)
+  @JoinColumn({ name: 'locationId' })
   location: Location;
+
+  @Column()
+  quantity: number;
 }

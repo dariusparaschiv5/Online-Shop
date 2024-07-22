@@ -11,7 +11,7 @@ import { Location } from './location.domain';
 @Entity()
 export class Stock {
   @PrimaryGeneratedColumn('uuid', { name: 'LocationId' })
-  ordersId: string;
+  locationId: string;
 
   @PrimaryGeneratedColumn('uuid', { name: 'ProductId' })
   productId: string;
@@ -24,7 +24,7 @@ export class Stock {
 
   @ManyToOne(() => Location, (location) => location.id)
   @JoinColumn({ name: 'LocationId' })
-  order: Location;
+  location: Location;
 
   @ManyToOne(() => Product, (product) => product.id)
   @JoinColumn({ name: 'ProductId' })
