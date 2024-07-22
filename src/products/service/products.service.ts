@@ -20,7 +20,7 @@ export class ProductsService {
     return this.productRepository.create(product);
   }
 
-  findAllProductCategories() {
+  findAllProducts() {
     return this.productRepository.findAll();
   }
 

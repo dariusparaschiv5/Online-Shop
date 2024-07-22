@@ -11,7 +11,7 @@ export class CustomerMapper {
     customer.lastName = createCustomerDTO.lastName;
     customer.username = createCustomerDTO.username;
     customer.password = createCustomerDTO.password;
-    customer.emailAdress = createCustomerDTO.emailAdress;
+    customer.emailAdress = createCustomerDTO.emailAddress;
     return customer;
   }
 

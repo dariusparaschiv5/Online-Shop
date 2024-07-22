@@ -19,7 +19,7 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 export class ProductCategoriesController {
   constructor(
     private readonly productCategoryService: ProductCategoriesService,
-    private productCategoryMapper: ProductCategoryMapper,
+    private readonly productCategoryMapper: ProductCategoryMapper,
   ) {}
 
   @Post()

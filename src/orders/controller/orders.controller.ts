@@ -18,8 +18,8 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 @Controller('orders')
 export class OrdersController {
   constructor(
-    private ordersService: OrderService,
-    private orderMapper: OrderMapper,
+    private readonly ordersService: OrderService,
+    private readonly orderMapper: OrderMapper,
   ) {}
 
   @Post()
@@ -29,8 +29,6 @@ export class OrdersController {
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async create(@Body() createOrderDTO: CreateOrderDTO): Promise<Order> {
-    console.log(11);
-    console.log(this.orderMapper.toDomain(createOrderDTO));
     return this.ordersService.createOrder(
       this.orderMapper.toDomain(createOrderDTO),
     );

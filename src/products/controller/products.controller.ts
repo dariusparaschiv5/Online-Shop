@@ -18,8 +18,8 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 @Controller('products')
 export class ProductsController {
   constructor(
-    private readonly productService: ProductsService,
-    private productMapper: ProductMapper,
+    private readonly productsService: ProductsService,
+    private readonly productMapper: ProductMapper,
   ) {}
 
   @Post()
@@ -29,7 +29,7 @@ export class ProductsController {
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async create(@Body() createProductDTO: CreateProductDTO): Promise<Product> {
-    return this.productService.createProduct(
+    return this.productsService.createProduct(
       this.productMapper.toDomain(createProductDTO),
     );
   }
@@ -41,11 +41,8 @@ export class ProductsController {
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async findAll(): Promise<ProductDTO[]> {
-    const productCategories =
-      await this.productService.findAllProductCategories();
-    return productCategories.map((product) =>
-      this.productMapper.toDTO(product),
-    );
+    const products = await this.productsService.findAllProducts();
+    return products.map((product) => this.productMapper.toDTO(product));
   }
 
   @Get(':id')
@@ -53,7 +50,7 @@ export class ProductsController {
   @ApiResponse({ status: 404, description: 'Product not found.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async findOne(@Param('id') id: string): Promise<ProductDTO | null> {
-    const product = await this.productService.findProductById(id);
+    const product = await this.productsService.findProductById(id);
     return this.productMapper.toDTO(product);
   }
 
@@ -66,7 +63,7 @@ export class ProductsController {
     @Body() newProduct: CreateProductDTO,
   ): Promise<Product> {
     const product = this.productMapper.toDomain(newProduct);
-    return this.productService.updateProduct(id, product);
+    return this.productsService.updateProduct(id, product);
   }
 
   @Delete(':id')
@@ -74,6 +71,6 @@ export class ProductsController {
   @ApiResponse({ status: 404, description: 'Product not found.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async remove(@Param('id') id: string): Promise<void> {
-    return this.productService.removeProduct(id);
+    return this.productsService.removeProduct(id);
   }
 }

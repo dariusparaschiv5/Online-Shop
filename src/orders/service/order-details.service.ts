@@ -8,12 +8,12 @@ import { LocationsRepository } from 'src/products/repository/locations.repositor
 export class OrderDetailsService {
   constructor(
     private readonly orderDetailsRepository: OrderDetailsRepository,
-    private readonly producstRepository: ProductsRepository,
+    private readonly productsRepository: ProductsRepository,
     private readonly locationsRepository: LocationsRepository,
   ) {}
 
   create(orderDetail: OrderDetail) {
-    const products = this.producstRepository.findAll();
+    const products = this.productsRepository.findAll();
     const location = this.locationsRepository.findOne(orderDetail.location.id);
     const order = this.orderDetailsRepository.findOne(orderDetail.order.id);
     if (!products) {

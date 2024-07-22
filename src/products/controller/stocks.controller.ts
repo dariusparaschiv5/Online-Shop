@@ -11,7 +11,7 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 export class StocksController {
   constructor(
     private readonly stocksService: StocksService,
-    private stockMapper: StockMapper,
+    private readonly stockMapper: StockMapper,
   ) {}
 
   @Post()

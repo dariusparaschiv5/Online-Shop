@@ -14,5 +14,5 @@ export class CreateCustomerDTO {
   readonly password: string;
 
   @ApiProperty()
-  readonly emailAdress: string;
+  readonly emailAddress: string;
 }

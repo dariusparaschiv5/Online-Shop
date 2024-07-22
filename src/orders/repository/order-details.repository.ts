@@ -22,11 +22,6 @@ export class OrderDetailsRepository {
     return this.orderDetailsRepository.find();
   }
 
-  // async update(id: string, orderDetail: OrderDetail): Promise<OrderDetail> {
-  //   await this.orderDetailsRepository.update(id, orderDetail);
-  //   return this.findOne(id);
-  // }
-
   remove(id: string) {
     this.orderDetailsRepository.delete(id);
   }

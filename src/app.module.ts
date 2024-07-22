@@ -11,6 +11,7 @@ import { Product } from './products/domain/product.domain';
 import { Location } from './products/domain/location.domain';
 import { Stock } from './products/domain/stock.domain';
 import { OrderDetail } from './orders/domain/order-detail.domain';
+import { HealthController } from './health.controller';
 
 @Module({
   imports: [
@@ -37,6 +38,6 @@ import { OrderDetail } from './orders/domain/order-detail.domain';
     ProductsModule,
     SharedModule,
   ],
-  controllers: [],
+  controllers: [HealthController],
 })
 export class AppModule {}
