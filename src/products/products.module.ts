@@ -8,7 +8,7 @@ import { ProductCategoriesRepository } from './repository/product-categories.rep
 import { ProductCategoryMapper } from './mapper/product-category.mapper';
 import { ProductCategoriesService } from './service/product-categories.service';
 import { ProductCategoriesController } from './controller/product-categories.controller';
-import { ProductRepository } from './repository/products.repository';
+import { ProductsRepository } from './repository/products.repository';
 import { ProductMapper } from './mapper/product.mapper';
 import { ProductsService } from './service/products.service';
 import { ProductsController } from './controller/products.controller';
@@ -25,7 +25,7 @@ import { StocksController } from './controller/stocks.controller';
     ProductCategoriesRepository,
     ProductCategoryMapper,
     ProductCategoriesService,
-    ProductRepository,
+    ProductsRepository,
     ProductMapper,
     ProductsService,
     StocksRepository,

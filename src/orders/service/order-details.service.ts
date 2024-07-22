@@ -1,36 +1,46 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { OrderDetailsRepository } from '../repository/order-details.repository';
 import { OrderDetail } from '../domain/order-detail.domain';
+import { ProductsRepository } from 'src/products/repository/products.repository';
+import { LocationsRepository } from 'src/products/repository/locations.repository';
 
 @Injectable()
 export class OrderDetailsService {
   constructor(
     private readonly orderDetailsRepository: OrderDetailsRepository,
+    private readonly producstRepository: ProductsRepository,
+    private readonly locationsRepository: LocationsRepository,
   ) {}
 
-  create(orderDetail: OrderDetail): Promise<OrderDetail> {
+  create(orderDetail: OrderDetail) {
+    const product = this.producstRepository.findOne(orderDetail.product.id);
+    const location = this.locationsRepository.findOne(orderDetail.location.id);
+    const order = this.orderDetailsRepository.findOne(orderDetail.order.id);
+    if (!product) {
+      throw new NotFoundException(`Product not found`);
+    }
+    if (!location) {
+      throw new NotFoundException(`Shipped from location not found`);
+    }
+    if (!order) {
+      throw new NotFoundException(`Order not found`);
+    }
     return this.orderDetailsRepository.create(orderDetail);
   }
 
-  async findOne(id: string): Promise<OrderDetail> {
-    const orderDetail = await this.orderDetailsRepository.findOne(id);
+  findOne(id: string) {
+    const orderDetail = this.orderDetailsRepository.findOne(id);
     if (!orderDetail) {
       throw new NotFoundException(`OrderDetail with ID ${id} not found`);
     }
     return orderDetail;
   }
 
-  findAll(): Promise<OrderDetail[]> {
+  findAll() {
     return this.orderDetailsRepository.findAll();
   }
 
-  // async update(id: string, orderDetail: OrderDetail): Promise<OrderDetail> {
-  //   await this.findOne(id); // Ensure it exists
-  //   return this.orderDetailsRepository.update(id, orderDetail);
-  // }
-
-  async remove(id: string): Promise<void> {
-    await this.findOne(id); // Ensure it exists
-    await this.orderDetailsRepository.remove(id);
+  remove(id: string) {
+    this.orderDetailsRepository.remove(id);
   }
 }

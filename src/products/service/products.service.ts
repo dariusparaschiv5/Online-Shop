@@ -1,12 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Product } from '../domain/product.domain';
-import { ProductRepository } from '../repository/products.repository';
+import { ProductsRepository } from '../repository/products.repository';
+import { ProductCategoriesRepository } from '../repository/product-categories.repository';
 
 @Injectable()
 export class ProductsService {
-  constructor(private productRepository: ProductRepository) {}
+  constructor(
+    private productRepository: ProductsRepository,
+    private productCategoryRepository: ProductCategoriesRepository,
+  ) {}
 
   createProduct(product: Product) {
+    const category = this.productCategoryRepository.findOne(
+      product.category.id,
+    );
+    if (!category) {
+      throw new NotFoundException(`ProductCategory not found`);
+    }
     return this.productRepository.create(product);
   }
 

@@ -1,23 +1,31 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { StocksRepository } from '../repository/stocks.repository';
 import { Stock } from '../domain/stock.domain';
+import { ProductsRepository } from '../repository/products.repository';
+import { LocationsRepository } from '../repository/locations.repository';
 
 @Injectable()
 export class StocksService {
-  constructor(private readonly stocksRepository: StocksRepository) {}
+  constructor(
+    private readonly stocksRepository: StocksRepository,
+    private readonly producstRepository: ProductsRepository,
+    private readonly locationsRepository: LocationsRepository,
+  ) {}
 
   create(stock: Stock) {
+    const product = this.producstRepository.findOne(stock.productId);
+    const location = this.locationsRepository.findOne(stock.locationId);
+    if (!product) {
+      throw new NotFoundException(`Product not found`);
+    }
+    if (!location) {
+      throw new NotFoundException(`Location not found`);
+    }
     return this.stocksRepository.create(stock);
   }
 
   findOne(locationId: string, productId: string) {
-    const stock = this.stocksRepository.findOne(locationId, productId);
-    if (!stock) {
-      throw new NotFoundException(
-        `Stock with LocationId ${locationId} and ProductId ${productId} not found`,
-      );
-    }
-    return stock;
+    return this.stocksRepository.findOne(locationId, productId);
   }
 
   findAll() {
@@ -31,12 +39,6 @@ export class StocksService {
   }
 
   remove(locationId: string, productId: string) {
-    const stock = this.findOne(locationId, productId);
-    if (!stock) {
-      throw new NotFoundException(
-        `Stock with LocationId ${locationId} and ProductId ${productId} not found`,
-      );
-    }
     return this.stocksRepository.remove(locationId, productId);
   }
 }
