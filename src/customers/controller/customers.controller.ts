@@ -1,10 +1,11 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { CustomersService } from '../service/customers.service';
 import { CreateCustomerDTO } from '../dto/create-customer.dto';
 import { Customer } from '../domain/customer.domain';
 import { CustomerMapper } from '../mapper/customer.mapper';
 import { CustomerDTO } from '../dto/customer.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('customers')
 @Controller('customers')
@@ -28,6 +29,7 @@ export class CustomersController {
     );
   }
 
+  @UseGuards(JwtGuard)
   @Get()
   @ApiResponse({
     status: 200,

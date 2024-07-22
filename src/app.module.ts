@@ -11,6 +11,7 @@ import { Product } from './products/domain/product.domain';
 import { Location } from './products/domain/location.domain';
 import { Stock } from './products/domain/stock.domain';
 import { OrderDetail } from './orders/domain/order-detail.domain';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { OrderDetail } from './orders/domain/order-detail.domain';
     OrdersModule,
     ProductsModule,
     SharedModule,
+    AuthModule,
   ],
   controllers: [],
 })
