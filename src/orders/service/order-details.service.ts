@@ -13,11 +13,11 @@ export class OrderDetailsService {
   ) {}
 
   create(orderDetail: OrderDetail) {
-    const product = this.producstRepository.findOne(orderDetail.product.id);
+    const products = this.producstRepository.findAll();
     const location = this.locationsRepository.findOne(orderDetail.location.id);
     const order = this.orderDetailsRepository.findOne(orderDetail.order.id);
-    if (!product) {
-      throw new NotFoundException(`Product not found`);
+    if (!products) {
+      throw new NotFoundException(`Products not found`);
     }
     if (!location) {
       throw new NotFoundException(`Shipped from location not found`);

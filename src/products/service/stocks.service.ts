@@ -13,10 +13,10 @@ export class StocksService {
   ) {}
 
   create(stock: Stock) {
-    const product = this.producstRepository.findOne(stock.productId);
+    const products = this.producstRepository.findAll();
     const location = this.locationsRepository.findOne(stock.locationId);
-    if (!product) {
-      throw new NotFoundException(`Product not found`);
+    if (!products) {
+      throw new NotFoundException(`Products not found`);
     }
     if (!location) {
       throw new NotFoundException(`Location not found`);

@@ -10,9 +10,18 @@ import { OrderDetailMapper } from './mapper/order-detail.mapper';
 import { OrderDetailsRepository } from './repository/order-details.repository';
 import { OrderDetailsService } from './service/order-details.service';
 import { OrderDetailsController } from './controller/orders-detail.controller';
+import { CustomersRepository } from 'src/customers/repository/customers.repository';
+import { ProductsRepository } from 'src/products/repository/products.repository';
+import { LocationsRepository } from 'src/products/repository/locations.repository';
+import { CustomersModule } from 'src/customers/customers.module';
+import { ProductsModule } from 'src/products/products.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Order, OrderDetail])],
+  imports: [
+    TypeOrmModule.forFeature([Order, OrderDetail]),
+    CustomersModule,
+    ProductsModule,
+  ],
   providers: [
     OrderMapper,
     OrdersRepository,
@@ -20,6 +29,9 @@ import { OrderDetailsController } from './controller/orders-detail.controller';
     OrderDetailMapper,
     OrderDetailsRepository,
     OrderDetailsService,
+    CustomersRepository,
+    ProductsRepository,
+    LocationsRepository,
   ],
   controllers: [OrdersController, OrderDetailsController],
 })

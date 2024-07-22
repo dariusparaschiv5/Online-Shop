@@ -1,8 +1,8 @@
 import { LocationDTO } from './location.dto';
-import { ProductCategoryDTO } from './product-category.dto';
+import { ProductDTO } from './product.dto';
 
 export class StockDTO {
-  product: ProductCategoryDTO;
+  product: ProductDTO[];
   location: LocationDTO;
   quantity: number;
 }

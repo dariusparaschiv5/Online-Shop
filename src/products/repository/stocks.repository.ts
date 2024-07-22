@@ -15,7 +15,9 @@ export class StocksRepository {
   }
 
   findOne(locationId: string, productId: string) {
-    return this.stocksRepository.findOne({ where: { locationId, productId } });
+    return this.stocksRepository.findOne({
+      where: { locationId, productsId: productId },
+    });
   }
 
   findAll() {
@@ -24,7 +26,7 @@ export class StocksRepository {
 
   async update(locationId: string, productId: string, stock: Stock) {
     const existingStock = await this.stocksRepository.findOne({
-      where: { locationId, productId },
+      where: { locationId, productsId: productId },
     });
     if (!existingStock) {
       throw new NotFoundException(
@@ -36,6 +38,6 @@ export class StocksRepository {
   }
 
   remove(locationId: string, productId: string) {
-    return this.stocksRepository.delete({ locationId, productId });
+    return this.stocksRepository.delete({ locationId, productsId: productId });
   }
 }

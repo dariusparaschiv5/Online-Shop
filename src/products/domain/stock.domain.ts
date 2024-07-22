@@ -14,7 +14,7 @@ export class Stock {
   locationId: string;
 
   @PrimaryGeneratedColumn('uuid', { name: 'ProductId' })
-  productId: string;
+  productsId: string[];
 
   @Column({
     name: 'Quantity',
@@ -28,5 +28,5 @@ export class Stock {
 
   @ManyToOne(() => Product, (product) => product.id)
   @JoinColumn({ name: 'ProductId' })
-  product: Product;
+  products: Product[];
 }

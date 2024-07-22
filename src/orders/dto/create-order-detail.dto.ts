@@ -1,6 +1,15 @@
-export class CreateOrderDetailDto {
+import { ApiProperty } from '@nestjs/swagger';
+
+export class CreateOrderDetailDTO {
+  @ApiProperty()
   ordersId: string;
-  productId: string;
+
+  @ApiProperty({ type: [String] })
+  productsId: string[];
+
+  @ApiProperty()
   locationId: string;
+
+  @ApiProperty()
   quantity: number;
 }

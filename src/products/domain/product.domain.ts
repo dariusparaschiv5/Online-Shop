@@ -57,6 +57,6 @@ export class Product {
   @JoinColumn({ name: 'ProductCategoryId' })
   category: ProductCategory;
 
-  @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.product)
+  @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.products)
   orderDetails: OrderDetail[];
 }

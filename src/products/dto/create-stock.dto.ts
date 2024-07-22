@@ -1,5 +1,12 @@
-export class CreateStockDto {
+import { ApiProperty } from '@nestjs/swagger';
+
+export class CreateStockDTO {
+  @ApiProperty()
   locationId: string;
-  productId: string;
+
+  @ApiProperty({ type: [String] })
+  productsId: string[];
+
+  @ApiProperty()
   quantity: number;
 }

@@ -48,6 +48,6 @@ export class Order {
   @JoinColumn({ name: 'CustomerId' })
   customer: Customer;
 
-  @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.product)
+  @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.products)
   orderDetails: OrderDetail[];
 }

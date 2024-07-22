@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { OrdersModule } from './orders/orders.module';
-import { HealthController } from './health.controller';
 import { CustomersModule } from './customers/customers.module';
 import { ProductsModule } from './products/products.module';
 import { SharedModule } from './shared/shared.module';
@@ -38,6 +37,6 @@ import { OrderDetail } from './orders/domain/order-detail.domain';
     ProductsModule,
     SharedModule,
   ],
-  controllers: [HealthController],
+  controllers: [],
 })
 export class AppModule {}

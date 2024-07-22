@@ -16,6 +16,7 @@ import { StocksRepository } from './repository/stocks.repository';
 import { StockMapper } from './mapper/stock.mapper';
 import { StocksService } from './service/stocks.service';
 import { StocksController } from './controller/stocks.controller';
+import { LocationsRepository } from './repository/locations.repository';
 
 @Module({
   imports: [
@@ -31,11 +32,13 @@ import { StocksController } from './controller/stocks.controller';
     StocksRepository,
     StockMapper,
     StocksService,
+    LocationsRepository,
   ],
   controllers: [
     ProductCategoriesController,
     ProductsController,
     StocksController,
   ],
+  exports: [TypeOrmModule.forFeature([ProductsRepository])],
 })
 export class ProductsModule {}

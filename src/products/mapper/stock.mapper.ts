@@ -1,12 +1,12 @@
 import { Stock } from '../domain/stock.domain';
-import { CreateStockDto } from '../dto/create-stock.dto';
+import { CreateStockDTO } from '../dto/create-stock.dto';
 import { StockDTO } from '../dto/stock.dto';
 
 export class StockMapper {
-  toDomain(createStockDto: CreateStockDto): Stock {
+  toDomain(createStockDto: CreateStockDTO): Stock {
     const stock = new Stock();
     stock.locationId = createStockDto.locationId;
-    stock.productId = createStockDto.productId;
+    stock.productsId = createStockDto.productsId;
     stock.quantity = createStockDto.quantity;
 
     return stock;
@@ -16,7 +16,7 @@ export class StockMapper {
     const stockDto = new StockDTO();
     stockDto.quantity = stock.quantity;
     stockDto.location = stock.location;
-    stockDto.product = stock.product;
+    stockDto.product = stock.products;
     return stockDto;
   }
 }

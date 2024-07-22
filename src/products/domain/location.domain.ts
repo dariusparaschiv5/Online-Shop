@@ -36,6 +36,6 @@ export class Location {
   })
   streetAdress: string;
 
-  @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.product)
+  @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.products)
   orderDetails: OrderDetail[];
 }
