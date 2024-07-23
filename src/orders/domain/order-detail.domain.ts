@@ -1,10 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Order } from './order.domain';
 import { Product } from 'src/products/domain/product.domain';
 import { Location } from 'src/products/domain/location.domain';
@@ -15,15 +9,12 @@ export class OrderDetail {
   id: string;
 
   @ManyToOne(() => Order, (order) => order.orderDetails)
-  @JoinColumn({ name: 'ordersId' })
   order: Order;
 
   @ManyToOne(() => Product, (product) => product.orderDetails)
-  @JoinColumn({ name: 'productId' })
   products: Product[];
 
   @ManyToOne(() => Location, (location) => location.orderDetails)
-  @JoinColumn({ name: 'locationId' })
   location: Location;
 
   @Column()

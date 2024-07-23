@@ -3,17 +3,15 @@ import { Product } from './product.domain';
 
 @Entity()
 export class ProductCategory {
-  @PrimaryGeneratedColumn('uuid', { name: 'Id' })
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({
-    name: 'Name',
     default: 'name',
   })
   name: string;
 
   @Column({
-    name: 'Description',
     default: 'description',
   })
   description: string;
