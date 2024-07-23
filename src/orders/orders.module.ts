@@ -4,15 +4,12 @@ import { Order } from './domain/order.domain';
 import { OrderDetail } from './domain/order-detail.domain';
 import { OrderMapper } from './mapper/order.mapper';
 import { OrdersRepository } from './repository/orders.repository';
-import { OrderService } from './service/orders.service';
+import { OrdersService } from './service/orders.service';
 import { OrdersController } from './controller/orders.controller';
 import { OrderDetailMapper } from './mapper/order-detail.mapper';
 import { OrderDetailsRepository } from './repository/order-details.repository';
 import { OrderDetailsService } from './service/order-details.service';
 import { OrderDetailsController } from './controller/orders-detail.controller';
-import { CustomersRepository } from 'src/customers/repository/customers.repository';
-import { ProductsRepository } from 'src/products/repository/products.repository';
-import { LocationsRepository } from 'src/products/repository/locations.repository';
 import { CustomersModule } from 'src/customers/customers.module';
 import { ProductsModule } from 'src/products/products.module';
 
@@ -25,14 +22,12 @@ import { ProductsModule } from 'src/products/products.module';
   providers: [
     OrderMapper,
     OrdersRepository,
-    OrderService,
+    OrdersService,
     OrderDetailMapper,
     OrderDetailsRepository,
     OrderDetailsService,
-    CustomersRepository,
-    ProductsRepository,
-    LocationsRepository,
   ],
   controllers: [OrdersController, OrderDetailsController],
+  exports: [OrdersService],
 })
 export class OrdersModule {}

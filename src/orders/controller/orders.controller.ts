@@ -8,7 +8,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { OrderMapper } from '../mapper/order.mapper';
-import { OrderService } from '../service/orders.service';
+import { OrdersService } from '../service/orders.service';
 import { CreateOrderDTO } from '../dto/create-order.dto';
 import { OrderDTO } from '../dto/order.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -17,7 +17,7 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 @Controller('orders')
 export class OrdersController {
   constructor(
-    private readonly ordersService: OrderService,
+    private readonly ordersService: OrdersService,
     private readonly orderMapper: OrderMapper,
   ) {}
 

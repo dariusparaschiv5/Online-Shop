@@ -1,17 +1,17 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { OrdersRepository } from '../repository/orders.repository';
 import { Order } from '../domain/order.domain';
-import { CustomersRepository } from 'src/customers/repository/customers.repository';
+import { CustomersService } from 'src/customers/service/customers.service';
 
 @Injectable()
-export class OrderService {
+export class OrdersService {
   constructor(
     private ordersRepository: OrdersRepository,
-    private customersRepository: CustomersRepository,
+    private customersService: CustomersService,
   ) {}
 
   createOrder(order: Order) {
-    const customer = this.customersRepository.findOne(order.customer.id);
+    const customer = this.customersService.findCustomerById(order.customer.id);
     if (!customer) {
       throw new NotFoundException(`Customer not found`);
     }
