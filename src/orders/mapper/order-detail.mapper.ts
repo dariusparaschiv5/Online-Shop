@@ -19,7 +19,6 @@ export class OrderDetailMapper {
 
   toDto(orderDetail: OrderDetail): OrderDetailDTO {
     const orderDetailDto = new OrderDetailDTO();
-    // orderDetailDto.order = orderDetail.order;
     orderDetailDto.product = orderDetail.product;
     orderDetailDto.location = orderDetail.location;
     orderDetailDto.quantity = orderDetail.quantity;

@@ -54,18 +54,6 @@ export class OrdersController {
     return this.orderMapper.toDTO(order);
   }
 
-  // @Put(':id')
-  // @ApiResponse({ status: 200, description: 'Order updated successfully.' })
-  // @ApiResponse({ status: 404, description: 'Order not found.' })
-  // @ApiResponse({ status: 403, description: 'Forbidden.' })
-  // async updateOrder(
-  //   @Param('id') id: string,
-  //   @Body() newOrder: CreateOrderDTO,
-  // ): Promise<OrderDTO> {
-  //   const order = this.orderMapper.toDomain(newOrder);
-  //   return this.ordersService.updateOrder(id, order);
-  // }
-
   @Delete(':id')
   @ApiResponse({ status: 204, description: 'Order deleted successfully.' })
   @ApiResponse({ status: 404, description: 'Order not found.' })
