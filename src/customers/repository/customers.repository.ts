@@ -10,19 +10,19 @@ export class CustomersRepository {
     private customersRepository: Repository<Customer>,
   ) {}
 
-  create(customer: Customer) {
+  async create(customer: Customer): Promise<Customer> {
     return this.customersRepository.save(customer);
   }
 
-  findOne(id: string) {
+  async findOne(id: string): Promise<Customer | null> {
     return this.customersRepository.findOneBy({ id });
   }
 
-  findAll(): Promise<Customer[]> {
+  async findAll(): Promise<Customer[]> {
     return this.customersRepository.find();
   }
 
-  update(id: string, updateData: Partial<Customer>) {
+  async update(id: string, updateData: Partial<Customer>): Promise<Customer> {
     return this.customersRepository.save({
       ...updateData,
       id: id,
@@ -30,6 +30,6 @@ export class CustomersRepository {
   }
 
   async remove(id: string): Promise<void> {
-    await this.customersRepository.delete(id);
+    this.customersRepository.delete(id);
   }
 }

@@ -10,19 +10,19 @@ export class LocationsRepository {
     private locationsRepository: Repository<Location>,
   ) {}
 
-  create(location: Location) {
+  async create(location: Location): Promise<Location> {
     return this.locationsRepository.save(location);
   }
 
-  findOne(id: string) {
+  async findOne(id: string): Promise<Location | null> {
     return this.locationsRepository.findOneBy({ id });
   }
 
-  findAll() {
+  async findAll(): Promise<Location[]> {
     return this.locationsRepository.find();
   }
 
-  async update(id: string, location: Location) {
+  async update(id: string, location: Location): Promise<Location> {
     const newLocation: Location = await this.locationsRepository.findOneBy({
       id,
     });
@@ -30,7 +30,7 @@ export class LocationsRepository {
     return this.locationsRepository.save(newLocation);
   }
 
-  remove(id: string) {
-    return this.locationsRepository.delete(id);
+  async remove(id: string): Promise<void> {
+    this.locationsRepository.delete(id);
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Stock } from '../domain/stock.domain';
@@ -10,34 +10,33 @@ export class StocksRepository {
     private stocksRepository: Repository<Stock>,
   ) {}
 
-  create(stock: Stock) {
+  async create(stock: Stock): Promise<Stock> {
     return this.stocksRepository.save(stock);
   }
 
-  findOne(locationId: string, productId: string) {
+  async findOne(locationId: string, productId: string): Promise<Stock | null> {
     return this.stocksRepository.findOne({
       where: { locationId, productsId: productId },
     });
   }
 
-  findAll() {
+  async findAll(): Promise<Stock[]> {
     return this.stocksRepository.find();
   }
 
-  async update(locationId: string, productId: string, stock: Stock) {
+  async update(
+    locationId: string,
+    productId: string,
+    stock: Stock,
+  ): Promise<Stock> {
     const existingStock = await this.stocksRepository.findOne({
       where: { locationId, productsId: productId },
     });
-    if (!existingStock) {
-      throw new NotFoundException(
-        `Stock with LocationId ${locationId} and ProductId ${productId} not found`,
-      );
-    }
     Object.assign(existingStock, stock);
     return this.stocksRepository.save(existingStock);
   }
 
-  remove(locationId: string, productId: string) {
-    return this.stocksRepository.delete({ locationId, productsId: productId });
+  async remove(locationId: string, productId: string): Promise<void> {
+    this.stocksRepository.delete({ locationId, productsId: productId });
   }
 }

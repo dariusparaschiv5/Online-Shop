@@ -10,19 +10,19 @@ export class OrderDetailsRepository {
     private orderDetailsRepository: Repository<OrderDetail>,
   ) {}
 
-  create(orderDetail: OrderDetail) {
+  async create(orderDetail: OrderDetail): Promise<OrderDetail> {
     return this.orderDetailsRepository.save(orderDetail);
   }
 
-  findOne(id: string) {
+  async findOne(id: string): Promise<OrderDetail | null> {
     return this.orderDetailsRepository.findOne({ where: { id } });
   }
 
-  findAll() {
+  async findAll(): Promise<OrderDetail[]> {
     return this.orderDetailsRepository.find();
   }
 
-  remove(id: string) {
+  async remove(id: string): Promise<void> {
     this.orderDetailsRepository.delete(id);
   }
 }

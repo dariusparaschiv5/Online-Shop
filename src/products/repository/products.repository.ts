@@ -10,25 +10,25 @@ export class ProductsRepository {
     private productRepository: Repository<Product>,
   ) {}
 
-  create(product: Product) {
+  async create(product: Product): Promise<Product> {
     return this.productRepository.save(product);
   }
 
-  findOne(id: string) {
+  async findOne(id: string): Promise<Product | null> {
     return this.productRepository.findOneBy({ id });
   }
 
-  findAll() {
+  async findAll(): Promise<Product[]> {
     return this.productRepository.find();
   }
 
-  async update(id: string, product: Product) {
+  async update(id: string, product: Product): Promise<Product> {
     const newProduct: Product = await this.productRepository.findOneBy({ id });
     Object.assign(newProduct, product);
     return this.productRepository.save(newProduct);
   }
 
-  remove(id: string) {
+  async remove(id: string): Promise<void> {
     this.productRepository.delete(id);
   }
 }

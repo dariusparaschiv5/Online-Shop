@@ -10,25 +10,25 @@ export class OrdersRepository {
     private ordersRepository: Repository<Order>,
   ) {}
 
-  create(order: Order) {
+  async create(order: Order): Promise<Order> {
     return this.ordersRepository.save(order);
   }
 
-  findAll() {
+  async findAll(): Promise<Order[]> {
     return this.ordersRepository.find();
   }
 
-  findOne(id: string) {
+  async findOne(id: string): Promise<Order | null> {
     return this.ordersRepository.findOneBy({ id });
   }
 
-  async update(id: string, order: Order) {
+  async update(id: string, order: Order): Promise<Order> {
     const newOrder: Order = await this.ordersRepository.findOneBy({ id });
     Object.assign(newOrder, order);
     return this.ordersRepository.save(newOrder);
   }
 
-  remove(id: string) {
+  async remove(id: string): Promise<void> {
     this.ordersRepository.delete(id);
   }
 }
