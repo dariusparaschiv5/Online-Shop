@@ -19,6 +19,6 @@ export class CustomersService {
   }
 
   findCustomerByUsername(username: string) {
-    return this.customersRepository.findOne(username);
+    return this.customersRepository.findOneByUsername(username);
   }
 }

@@ -1,8 +1,8 @@
-import { Body, Controller, Post, UseGuards, Request } from '@nestjs/common';
+import { Controller, Post, UseGuards, Request } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
 import { CustomersService } from 'src/customers/service/customers.service';
-import { Customer } from 'src/customers/domain/customer.domain';
-import { RefreshJwtGuard } from '../guards/refresh-jwt-auth.guards';
+
+import { LocalAuthGuard } from '../guards/local-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -11,20 +11,15 @@ export class AuthController {
     private customersService: CustomersService,
   ) {}
 
-  // @UseGuards(LocalAuthGuard)
-  // @Post('logIn')
-  // async login(@Request() req) {
-  //   return await this.authService.logIn(req.)
+  @UseGuards(LocalAuthGuard)
+  @Post('logIn')
+  async login(@Request() req) {
+    return await this.authService.logIn(req.body);
+  }
+
+  // @UseGuards(RefreshJwtGuard)
+  // @Post('refresh')
+  // async refreshToken(@Request() req) {
+  //   return this.authService.refrehToken(req.customer);
   // }
-
-  @Post('register')
-  async registerCustomer(@Body() customer: Customer) {
-    return await this.customersService.createCustomer(customer);
-  }
-
-  @UseGuards(RefreshJwtGuard)
-  @Post('refresh')
-  async refreshToken(@Request() req) {
-    return this.authService.refrehToken(req.customer);
-  }
 }
