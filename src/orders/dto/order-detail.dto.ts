@@ -4,7 +4,7 @@ import { LocationDTO } from 'src/products/dto/location.dto';
 
 export class OrderDetailDTO {
   order: OrderDTO;
-  products: ProductDTO[];
+  product: ProductDTO;
   location: LocationDTO;
   quantity: number;
 }

@@ -9,7 +9,6 @@ import { OrdersController } from './controller/orders.controller';
 import { OrderDetailMapper } from './mapper/order-detail.mapper';
 import { OrderDetailsRepository } from './repository/order-details.repository';
 import { OrderDetailsService } from './service/order-details.service';
-import { OrderDetailsController } from './controller/orders-detail.controller';
 import { CustomersModule } from 'src/customers/customers.module';
 import { ProductsModule } from 'src/products/products.module';
 
@@ -27,7 +26,7 @@ import { ProductsModule } from 'src/products/products.module';
     OrderDetailsRepository,
     OrderDetailsService,
   ],
-  controllers: [OrdersController, OrderDetailsController],
-  exports: [OrdersService],
+  controllers: [OrdersController],
+  exports: [OrdersService, OrderDetailsService],
 })
 export class OrdersModule {}

@@ -1,24 +1,20 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { OrderMapper } from '../mapper/order.mapper';
 import { OrdersService } from '../service/orders.service';
 import { CreateOrderDTO } from '../dto/create-order.dto';
 import { OrderDTO } from '../dto/order.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { StocksService } from 'src/products/service/stocks.service';
+import { OrderDetailMapper } from '../mapper/order-detail.mapper';
 
 @ApiTags('orders')
 @Controller('orders')
 export class OrdersController {
   constructor(
     private readonly ordersService: OrdersService,
+    private readonly stockService: StocksService,
     private readonly orderMapper: OrderMapper,
+    private readonly orderDetailsMapper: OrderDetailMapper,
   ) {}
 
   @Post()
@@ -28,8 +24,13 @@ export class OrdersController {
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async create(@Body() createOrderDTO: CreateOrderDTO): Promise<OrderDTO> {
+    // map all order details dto to order details
+    const orderDetails = this.orderDetailsMapper.toDomains(
+      createOrderDTO.orderDetails,
+    );
     return this.ordersService.createOrder(
-      this.orderMapper.toDomain(createOrderDTO),
+      this.orderMapper.toDomain(createOrderDTO, orderDetails),
+      orderDetails,
     );
   }
 
@@ -53,17 +54,17 @@ export class OrdersController {
     return this.orderMapper.toDTO(order);
   }
 
-  @Put(':id')
-  @ApiResponse({ status: 200, description: 'Order updated successfully.' })
-  @ApiResponse({ status: 404, description: 'Order not found.' })
-  @ApiResponse({ status: 403, description: 'Forbidden.' })
-  async updateOrder(
-    @Param('id') id: string,
-    @Body() newOrder: CreateOrderDTO,
-  ): Promise<OrderDTO> {
-    const order = this.orderMapper.toDomain(newOrder);
-    return this.ordersService.updateOrder(id, order);
-  }
+  // @Put(':id')
+  // @ApiResponse({ status: 200, description: 'Order updated successfully.' })
+  // @ApiResponse({ status: 404, description: 'Order not found.' })
+  // @ApiResponse({ status: 403, description: 'Forbidden.' })
+  // async updateOrder(
+  //   @Param('id') id: string,
+  //   @Body() newOrder: CreateOrderDTO,
+  // ): Promise<OrderDTO> {
+  //   const order = this.orderMapper.toDomain(newOrder);
+  //   return this.ordersService.updateOrder(id, order);
+  // }
 
   @Delete(':id')
   @ApiResponse({ status: 204, description: 'Order deleted successfully.' })

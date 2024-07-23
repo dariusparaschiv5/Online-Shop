@@ -1,18 +1,21 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Order } from './order.domain';
 import { Product } from 'src/products/domain/product.domain';
 import { Location } from 'src/products/domain/location.domain';
+import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class OrderDetail {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryColumn()
+  orderId: string;
+
+  @PrimaryColumn()
+  productId: string;
 
   @ManyToOne(() => Order, (order) => order.orderDetails)
   order: Order;
 
   @ManyToOne(() => Product, (product) => product.orderDetails)
-  products: Product[];
+  product: Product;
 
   @ManyToOne(() => Location, (location) => location.orderDetails)
   location: Location;

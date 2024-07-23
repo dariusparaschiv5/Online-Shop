@@ -10,12 +10,7 @@ export class OrderDetailMapper {
     const orderDetail = new OrderDetail();
 
     orderDetail.order = { id: createOrderDetailDto.ordersId } as Order;
-    orderDetail.products = createOrderDetailDto.productsId.map(
-      (id) =>
-        ({
-          id: id,
-        }) as Product,
-    );
+    orderDetail.product = { id: createOrderDetailDto.productId } as Product;
     orderDetail.location = { id: createOrderDetailDto.locationId } as Location;
     orderDetail.quantity = createOrderDetailDto.quantity;
 
@@ -24,10 +19,18 @@ export class OrderDetailMapper {
 
   toDto(orderDetail: OrderDetail): OrderDetailDTO {
     const orderDetailDto = new OrderDetailDTO();
-    orderDetailDto.order = orderDetail.order;
-    orderDetailDto.products = orderDetail.products;
+    // orderDetailDto.order = orderDetail.order;
+    orderDetailDto.product = orderDetail.product;
     orderDetailDto.location = orderDetail.location;
     orderDetailDto.quantity = orderDetail.quantity;
     return orderDetailDto;
+  }
+
+  toDomains(createOrderDetailDtos: CreateOrderDetailDTO[]) {
+    const orderDetails: OrderDetail[] = [];
+    createOrderDetailDtos.map((createOrderDetailDto) => {
+      orderDetails.push(this.toDomain(createOrderDetailDto));
+    });
+    return orderDetails;
   }
 }

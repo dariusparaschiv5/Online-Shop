@@ -15,23 +15,22 @@ export class OrderDetailsService {
   create(orderDetail: OrderDetail) {
     const products = this.productsService.findAllProducts();
     const location = this.locationsService.findOne(orderDetail.location.id);
-    const order = this.orderDetailsRepository.findOne(orderDetail.order.id);
     if (!products) {
       throw new NotFoundException(`Products not found`);
     }
     if (!location) {
       throw new NotFoundException(`Shipped from location not found`);
     }
-    if (!order) {
-      throw new NotFoundException(`Order not found`);
-    }
     return this.orderDetailsRepository.create(orderDetail);
   }
 
-  findOne(id: string) {
-    const orderDetail = this.orderDetailsRepository.findOne(id);
+  findOne(productId: string, locationId: string) {
+    const orderDetail = this.orderDetailsRepository.findOne(
+      productId,
+      locationId,
+    );
     if (!orderDetail) {
-      throw new NotFoundException(`OrderDetail with ID ${id} not found`);
+      throw new NotFoundException(`OrderDetail with not found`);
     }
     return orderDetail;
   }

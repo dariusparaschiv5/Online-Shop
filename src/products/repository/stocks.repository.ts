@@ -16,7 +16,7 @@ export class StocksRepository {
 
   async findOne(locationId: string, productId: string): Promise<Stock | null> {
     return this.stocksRepository.findOne({
-      where: { locationId, productsId: productId },
+      where: { locationId, productId },
     });
   }
 
@@ -30,13 +30,13 @@ export class StocksRepository {
     stock: Stock,
   ): Promise<Stock> {
     const existingStock = await this.stocksRepository.findOne({
-      where: { locationId, productsId: productId },
+      where: { locationId, productId },
     });
     Object.assign(existingStock, stock);
     return this.stocksRepository.save(existingStock);
   }
 
   async remove(locationId: string, productId: string): Promise<void> {
-    this.stocksRepository.delete({ locationId, productsId: productId });
+    this.stocksRepository.delete({ locationId, productId });
   }
 }

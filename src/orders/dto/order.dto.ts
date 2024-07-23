@@ -1,4 +1,6 @@
 import { CustomerDTO } from 'src/customers/dto/customer.dto';
+import { OrderDetailDTO } from './order-detail.dto';
+// import { OrderDetailDTO } from './order-detail.dto';
 
 export class OrderDTO {
   customer: CustomerDTO;
@@ -7,4 +9,5 @@ export class OrderDTO {
   city: string;
   county: string;
   streetAdress: string;
+  orderDetails: OrderDetailDTO[];
 }

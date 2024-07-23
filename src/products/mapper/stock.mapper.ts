@@ -6,7 +6,7 @@ export class StockMapper {
   toDomain(createStockDto: CreateStockDTO): Stock {
     const stock = new Stock();
     stock.locationId = createStockDto.locationId;
-    stock.productsId = createStockDto.productsId;
+    stock.productId = createStockDto.productsId;
     stock.quantity = createStockDto.quantity;
 
     return stock;
@@ -16,7 +16,7 @@ export class StockMapper {
     const stockDto = new StockDTO();
     stockDto.quantity = stock.quantity;
     stockDto.location = stock.location;
-    stockDto.product = stock.products;
+    stockDto.product = stock.product;
     return stockDto;
   }
 }

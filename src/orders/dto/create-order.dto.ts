@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { CreateOrderDetailDTO } from './create-order-detail.dto';
 
 export class CreateOrderDTO {
   @ApiProperty()
@@ -18,4 +19,7 @@ export class CreateOrderDTO {
 
   @ApiProperty()
   readonly streetAdress: string;
+
+  @ApiProperty()
+  orderDetails: CreateOrderDetailDTO[];
 }

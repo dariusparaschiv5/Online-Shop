@@ -4,8 +4,8 @@ export class CreateOrderDetailDTO {
   @ApiProperty()
   ordersId: string;
 
-  @ApiProperty({ type: [String] })
-  productsId: string[];
+  @ApiProperty()
+  productId: string;
 
   @ApiProperty()
   locationId: string;

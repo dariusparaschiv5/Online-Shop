@@ -14,8 +14,16 @@ export class OrderDetailsRepository {
     return this.orderDetailsRepository.save(orderDetail);
   }
 
-  async findOne(id: string): Promise<OrderDetail | null> {
-    return this.orderDetailsRepository.findOne({ where: { id } });
+  async findOne(
+    orderId: string,
+    productId: string,
+  ): Promise<OrderDetail | null> {
+    return this.orderDetailsRepository.findOne({
+      where: {
+        orderId: orderId,
+        productId: productId,
+      },
+    });
   }
 
   async findAll(): Promise<OrderDetail[]> {

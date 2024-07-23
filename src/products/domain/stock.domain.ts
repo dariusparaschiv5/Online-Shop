@@ -1,14 +1,14 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 import { Product } from './product.domain';
 import { Location } from './location.domain';
 
 @Entity()
 export class Stock {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   locationId: string;
 
-  @PrimaryGeneratedColumn('uuid')
-  productsId: string[];
+  @PrimaryColumn()
+  productId: string;
 
   @Column({
     default: 0,
@@ -19,5 +19,5 @@ export class Stock {
   location: Location;
 
   @ManyToOne(() => Product, (product) => product.id)
-  products: Product[];
+  product: Product;
 }
