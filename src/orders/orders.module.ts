@@ -9,8 +9,8 @@ import { OrdersController } from './controller/orders.controller';
 import { OrderDetailMapper } from './mapper/order-detail.mapper';
 import { OrderDetailsRepository } from './repository/order-details.repository';
 import { OrderDetailsService } from './service/order-details.service';
-import { CustomersModule } from 'src/customers/customers.module';
-import { ProductsModule } from 'src/products/products.module';
+import { CustomersModule } from '../customers/customers.module';
+import { ProductsModule } from '../products/products.module';
 
 @Module({
   imports: [

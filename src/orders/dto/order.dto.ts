@@ -1,4 +1,4 @@
-import { CustomerDTO } from 'src/customers/dto/customer.dto';
+import { CustomerDTO } from '../../customers/dto/customer.dto';
 import { OrderDetailDTO } from './order-detail.dto';
 
 export class OrderDTO {

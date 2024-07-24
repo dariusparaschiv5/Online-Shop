@@ -5,9 +5,9 @@ import {
 } from '@nestjs/common';
 import { OrdersRepository } from '../repository/orders.repository';
 import { Order } from '../domain/order.domain';
-import { CustomersService } from 'src/customers/service/customers.service';
+import { CustomersService } from '../../customers/service/customers.service';
 import { OrderDetailsService } from './order-details.service';
-import { StocksService } from 'src/products/service/stocks.service';
+import { StocksService } from '../../products/service/stocks.service';
 import { OrderDetail } from '../domain/order-detail.domain';
 
 @Injectable()

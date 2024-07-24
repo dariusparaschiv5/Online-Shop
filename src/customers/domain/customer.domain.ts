@@ -1,4 +1,4 @@
-import { Order } from 'src/orders/domain/order.domain';
+import { Order } from '../../orders/domain/order.domain';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Role } from './role.enum';
 

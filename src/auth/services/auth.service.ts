@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CustomersService } from 'src/customers/service/customers.service';
-import { Customer } from 'src/customers/domain/customer.domain';
+import { CustomersService } from '../../customers/service/customers.service';
+import { Customer } from '../../customers/domain/customer.domain';
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcrypt';
 

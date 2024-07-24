@@ -13,9 +13,9 @@ import { ProductCategoryMapper } from '../mapper/product-category.mapper';
 import { ProductCategoriesService } from '../service/product-categories.service';
 import { CreateProductCategoryDTO } from '../dto/create-product-category.dto';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Roles } from 'src/auth/decorators/roles.decorator';
-import { JwtGuard } from 'src/auth/guards/jwt-auth.guard';
-import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Roles } from '../../auth/decorators/roles.decorator';
+import { JwtGuard } from '../../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../../auth/guards/roles.guard';
 
 @Roles()
 @UseGuards(JwtGuard, RolesGuard)

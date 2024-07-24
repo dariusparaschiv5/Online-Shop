@@ -4,7 +4,7 @@ import { AuthController } from './controllers/auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt-auth.strategy';
 import { RefreshJwtStrategy } from './strategies/refresh-token.strategy';
-import { CustomersModule } from 'src/customers/customers.module';
+import { CustomersModule } from '../customers/customers.module';
 import { LocalStrategy } from './strategies/local-auth.strategy';
 import { RolesGuard } from './guards/roles.guard';
 

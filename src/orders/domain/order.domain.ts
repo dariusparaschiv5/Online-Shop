@@ -1,4 +1,4 @@
-import { Customer } from 'src/customers/domain/customer.domain';
+import { Customer } from '../../customers/domain/customer.domain';
 import {
   Column,
   Entity,

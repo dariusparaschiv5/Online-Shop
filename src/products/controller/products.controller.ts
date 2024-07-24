@@ -13,10 +13,10 @@ import { ProductMapper } from '../mapper/product.mapper';
 import { CreateProductDTO } from '../dto/create-product.dto';
 import { ProductDTO } from '../dto/product.dto';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Roles } from 'src/auth/decorators/roles.decorator';
-import { Role } from 'src/customers/domain/role.enum';
-import { RolesGuard } from 'src/auth/guards/roles.guard';
-import { JwtGuard } from 'src/auth/guards/jwt-auth.guard';
+import { Roles } from '../../auth/decorators/roles.decorator';
+import { Role } from '../../customers/domain/role.enum';
+import { RolesGuard } from '../../auth/guards/roles.guard';
+import { JwtGuard } from '../../auth/guards/jwt-auth.guard';
 
 @ApiTags('products')
 @ApiBearerAuth()
@@ -55,6 +55,7 @@ export class ProductsController {
     return products.map((product) => this.productMapper.toDTO(product));
   }
 
+  @UseGuards(JwtGuard, RolesGuard)
   @Get(':id')
   @ApiResponse({ status: 200, description: 'Product retrieved successfully.' })
   @ApiResponse({ status: 404, description: 'Product not found.' })
