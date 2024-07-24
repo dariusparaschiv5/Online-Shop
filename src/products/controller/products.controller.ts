@@ -12,13 +12,14 @@ import { ProductsService } from '../service/products.service';
 import { ProductMapper } from '../mapper/product.mapper';
 import { CreateProductDTO } from '../dto/create-product.dto';
 import { ProductDTO } from '../dto/product.dto';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/customers/domain/role.enum';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('products')
+@ApiBearerAuth()
 @Controller('products')
 export class ProductsController {
   constructor(

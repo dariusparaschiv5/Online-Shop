@@ -11,7 +11,7 @@ import { OrderMapper } from '../mapper/order.mapper';
 import { OrdersService } from '../service/orders.service';
 import { CreateOrderDTO } from '../dto/create-order.dto';
 import { OrderDTO } from '../dto/order.dto';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { StocksService } from 'src/products/service/stocks.service';
 import { OrderDetailMapper } from '../mapper/order-detail.mapper';
 import { Roles } from 'src/auth/decorators/roles.decorator';
@@ -22,6 +22,7 @@ import { Role } from 'src/customers/domain/role.enum';
 @Roles(Role.ADMIN, Role.CUSTOMER)
 @UseGuards(JwtGuard, RolesGuard)
 @ApiTags('orders')
+@ApiBearerAuth()
 @Controller('orders')
 export class OrdersController {
   constructor(
