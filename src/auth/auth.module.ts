@@ -6,14 +6,22 @@ import { JwtStrategy } from './strategies/jwt-auth.strategy';
 import { RefreshJwtStrategy } from './strategies/refresh-token.strategy';
 import { CustomersModule } from 'src/customers/customers.module';
 import { LocalStrategy } from './strategies/local-auth.strategy';
+import { RolesGuard } from './guards/roles.guard';
 
 @Module({
-  providers: [AuthService, JwtStrategy, RefreshJwtStrategy, LocalStrategy],
+  providers: [
+    AuthService,
+    JwtStrategy,
+    RefreshJwtStrategy,
+    LocalStrategy,
+    RolesGuard,
+  ],
   controllers: [AuthController],
   imports: [
     CustomersModule,
     JwtModule.register({
-      secret: 'secret',
+      global: true,
+      secret: `${process.env.JWT_SECRET}`,
       signOptions: { expiresIn: '3600s' },
     }),
   ],

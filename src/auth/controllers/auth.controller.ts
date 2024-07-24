@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { CustomersService } from 'src/customers/service/customers.service';
 
 import { LocalAuthGuard } from '../guards/local-auth.guard';
+import { RefreshJwtGuard } from '../guards/refresh-jwt-auth.guards';
 
 @Controller('auth')
 export class AuthController {
@@ -17,9 +18,9 @@ export class AuthController {
     return await this.authService.logIn(req.body);
   }
 
-  // @UseGuards(RefreshJwtGuard)
-  // @Post('refresh')
-  // async refreshToken(@Request() req) {
-  //   return this.authService.refrehToken(req.customer);
-  // }
+  @UseGuards(RefreshJwtGuard)
+  @Post('refresh')
+  async refreshToken(@Request() req) {
+    return this.authService.refrehToken(req.body);
+  }
 }

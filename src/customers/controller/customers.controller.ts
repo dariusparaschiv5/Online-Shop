@@ -6,7 +6,12 @@ import { CustomerMapper } from '../mapper/customer.mapper';
 import { CustomerDTO } from '../dto/customer.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Role } from '../domain/role.enum';
 
+@Roles(Role.ADMIN, Role.CUSTOMER)
+@UseGuards(JwtGuard, RolesGuard)
 @ApiTags('customers')
 @Controller('customers')
 export class CustomersController {
@@ -29,7 +34,6 @@ export class CustomersController {
     );
   }
 
-  @UseGuards(JwtGuard)
   @Get()
   @ApiResponse({
     status: 200,

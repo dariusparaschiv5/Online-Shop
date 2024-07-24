@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Role } from '../domain/role.enum';
 
 export class CreateCustomerDTO {
   @ApiProperty()
@@ -15,4 +16,7 @@ export class CreateCustomerDTO {
 
   @ApiProperty()
   readonly emailAddress: string;
+
+  @ApiProperty({ enum: Role, default: Role.CUSTOMER })
+  readonly role: Role;
 }

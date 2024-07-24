@@ -14,18 +14,25 @@ export class AuthService {
   async validateCustomer(username: string, password: string) {
     const customer =
       await this.customersService.findCustomerByUsername(username);
+
     if (customer && (await compare(password, customer.password))) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...customerData } = customer;
       return customerData;
     }
+    // console.log('password incorrect');
     return null;
   }
 
   async logIn(customer: Customer) {
+    const valid = await this.validateCustomer(
+      customer.username,
+      customer.password,
+    );
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...customerData } = customer;
-    const payload = { sub: customer.id };
+    const payload = { sub: customer.id, role: valid.role };
+
     return {
       ...customerData,
       accessToken: this.jwtService.sign(payload),
@@ -33,15 +40,16 @@ export class AuthService {
     };
   }
 
-  // async refrehToken(customer: Customer) {
-  //   const payload = {
-  //     username: customer.username,
-  //     sub: {
-  //       id: customer.id,
-  //     },
-  //   };
-  //   return {
-  //     accesToken: this.jwtService.sign(payload),
-  //   };
-  // }
+  async refrehToken(customer: Customer) {
+    const payload = {
+      username: customer.username,
+      sub: {
+        id: customer.id,
+        role: customer.role,
+      },
+    };
+    return {
+      accesToken: this.jwtService.sign(payload),
+    };
+  }
 }

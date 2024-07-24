@@ -19,7 +19,7 @@ export class CustomersRepository {
   }
 
   async findOneByUsername(username: string): Promise<Customer | null> {
-    return this.customersRepository.findOneBy({ username });
+    return this.customersRepository.findOne({ where: { username } });
   }
 
   async findAll(): Promise<Customer[]> {
