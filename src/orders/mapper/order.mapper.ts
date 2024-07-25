@@ -1,4 +1,4 @@
-import { Customer } from 'src/customers/domain/customer.domain';
+import { Customer } from '../../customers/domain/customer.domain';
 import { Order } from '../domain/order.domain';
 import { CreateOrderDTO } from '../dto/create-order.dto';
 import { OrderDTO } from '../dto/order.dto';

@@ -14,7 +14,11 @@ export class CustomersService {
     return this.customersRepository.findAll();
   }
 
-  findCustomerById(id: string): Promise<Customer | null> {
+  async findCustomerById(id: string): Promise<Customer | null> {
     return this.customersRepository.findOne(id);
+  }
+
+  findCustomerByUsername(username: string) {
+    return this.customersRepository.findOneByUsername(username);
   }
 }

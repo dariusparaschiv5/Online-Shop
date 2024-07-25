@@ -6,14 +6,21 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { ProductCategoryDTO } from '../dto/product-category.dto';
 import { ProductCategoryMapper } from '../mapper/product-category.mapper';
 import { ProductCategoriesService } from '../service/product-categories.service';
 import { CreateProductCategoryDTO } from '../dto/create-product-category.dto';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Roles } from '../../auth/decorators/roles.decorator';
+import { JwtGuard } from '../../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../../auth/guards/roles.guard';
 
+@Roles()
+@UseGuards(JwtGuard, RolesGuard)
 @ApiTags('product-categories')
+@ApiBearerAuth()
 @Controller('product-categories')
 export class ProductCategoriesController {
   constructor(

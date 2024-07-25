@@ -12,6 +12,7 @@ import { Location } from './products/domain/location.domain';
 import { Stock } from './products/domain/stock.domain';
 import { OrderDetail } from './orders/domain/order-detail.domain';
 import { HealthController } from './health.controller';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { HealthController } from './health.controller';
     OrdersModule,
     ProductsModule,
     SharedModule,
+    AuthModule,
   ],
   controllers: [HealthController],
 })

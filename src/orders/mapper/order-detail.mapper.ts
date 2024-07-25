@@ -2,8 +2,8 @@ import { OrderDetail } from '../domain/order-detail.domain';
 import { CreateOrderDetailDTO } from '../dto/create-order-detail.dto';
 import { OrderDetailDTO } from '../dto/order-detail.dto';
 import { Order } from '../domain/order.domain';
-import { Product } from 'src/products/domain/product.domain';
-import { Location } from 'src/products/domain/location.domain';
+import { Product } from '../../products/domain/product.domain';
+import { Location } from '../../products/domain/location.domain';
 
 export class OrderDetailMapper {
   toDomain(createOrderDetailDto: CreateOrderDetailDTO): OrderDetail {
@@ -19,7 +19,6 @@ export class OrderDetailMapper {
 
   toDto(orderDetail: OrderDetail): OrderDetailDTO {
     const orderDetailDto = new OrderDetailDTO();
-    // orderDetailDto.order = orderDetail.order;
     orderDetailDto.product = orderDetail.product;
     orderDetailDto.location = orderDetail.location;
     orderDetailDto.quantity = orderDetail.quantity;
