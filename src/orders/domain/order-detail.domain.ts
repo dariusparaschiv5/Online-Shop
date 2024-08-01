@@ -20,6 +20,19 @@ export class OrderDetail {
   @ManyToOne(() => Location, (location) => location.orderDetails)
   location: Location;
 
+  locationId: string;
   @Column()
   quantity: number;
+
+  constructor(
+    orderId: string,
+    productId: string,
+    shippedFrom: Location,
+    quantity: number,
+  ) {
+    this.orderId = orderId;
+    this.productId = productId;
+    this.location = shippedFrom;
+    this.quantity = quantity;
+  }
 }

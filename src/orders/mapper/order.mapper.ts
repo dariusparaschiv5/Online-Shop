@@ -1,32 +1,53 @@
-import { Customer } from '../../customers/domain/customer.domain';
+import { CustomerDTO } from 'src/customers/dto/customer.dto';
 import { Order } from '../domain/order.domain';
-import { CreateOrderDTO } from '../dto/create-order.dto';
 import { OrderDTO } from '../dto/order.dto';
-import { OrderDetail } from '../domain/order-detail.domain';
-// import { OrderDetail } from '../domain/order-detail.domain';
+import { Customer } from 'src/customers/domain/customer.domain';
+import { CreateOrderDTO } from '../dto/create-order.dto';
 
 export class OrderMapper {
-  toDomain(createOrderDTO: CreateOrderDTO, orderDetails: OrderDetail[]): Order {
-    const order = new Order();
-    order.customer = { id: createOrderDTO.customerId } as unknown as Customer;
-    order.createdAt = createOrderDTO.createdAt;
-    order.city = createOrderDTO.city;
-    order.country = createOrderDTO.country;
-    order.county = createOrderDTO.county;
-    order.streetAdress = createOrderDTO.streetAdress;
-    order.orderDetails = orderDetails;
-    return order;
+  static toDTO(order: Order, customerDTO: CustomerDTO): OrderDTO {
+    return new OrderDTO(
+      customerDTO,
+      order.createdAt,
+      order.country,
+      order.city,
+      order.county,
+      order.streetAdress,
+    );
   }
 
-  toDTO(order: Order): OrderDTO {
-    const orderDTO = new OrderDTO();
-    orderDTO.customer = order.customer;
-    orderDTO.createdAt = order.createdAt;
-    orderDTO.city = order.city;
-    orderDTO.country = order.country;
-    orderDTO.county = order.county;
-    orderDTO.streetAdress = order.streetAdress;
-    // orderDTO.orderDetail = order.orderDetail;
-    return orderDTO;
+  static toEntity(orderDTO: OrderDTO, customer: Customer): Order {
+    return new Order(
+      customer,
+      orderDTO.country,
+      orderDTO.city,
+      orderDTO.county,
+      orderDTO.streetAdress,
+      orderDTO.createdAt,
+    );
+  }
+
+  static toCreateDTO(order: Order): CreateOrderDTO {
+    return new CreateOrderDTO(
+      order.customer.id,
+      order.country,
+      order.city,
+      order.county,
+      order.streetAdress,
+      order.createdAt,
+    );
+  }
+
+  static createDTOToEntity(
+    createOrderDTO: CreateOrderDTO,
+    customer: Customer,
+  ): Order {
+    return new Order(
+      customer,
+      createOrderDTO.country,
+      createOrderDTO.city,
+      createOrderDTO.county,
+      createOrderDTO.streetAdress,
+    );
   }
 }

@@ -19,12 +19,23 @@ export class ProductMapper {
   }
 
   toDTO(product: Product): ProductDTO {
+    if (!product.category) {
+      throw new Error(`Category not found for product ID ${product.id}`);
+    }
     const productDTO = new ProductDTO();
     productDTO.name = product.name;
     productDTO.description = product.description;
     productDTO.price = product.price;
     productDTO.weight = product.weight;
-    productDTO.category = product.category;
+    productDTO.category = product.category
+      ? {
+          name: product.category.name,
+          description: product.category.description,
+        }
+      : {
+          name: 'Default category',
+          description: 'Default category description',
+        };
     productDTO.supplier = product.supplier;
     productDTO.imageUrl = product.imageUrl;
     return productDTO;

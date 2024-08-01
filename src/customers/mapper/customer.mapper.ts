@@ -5,6 +5,9 @@ import { CustomerDTO } from '../dto/customer.dto';
 
 @Injectable()
 export class CustomerMapper {
+  static toDTO(customer: Customer): CustomerDTO {
+    throw new Error('Method not implemented.');
+  }
   toDomain(createCustomerDTO: CreateCustomerDTO): Customer {
     const customer = new Customer();
     customer.firstName = createCustomerDTO.firstName;

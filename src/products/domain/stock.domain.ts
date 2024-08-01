@@ -18,6 +18,8 @@ export class Stock {
   @ManyToOne(() => Location, (location) => location.id)
   location: Location;
 
-  @ManyToOne(() => Product, (product) => product.id)
+  @ManyToOne(() => Product, (product) => product.id, {
+    onDelete: 'CASCADE',
+  })
   product: Product;
 }

@@ -11,6 +11,7 @@ import { OrderDetailsRepository } from './repository/order-details.repository';
 import { OrderDetailsService } from './service/order-details.service';
 import { CustomersModule } from '../customers/customers.module';
 import { ProductsModule } from '../products/products.module';
+// import { OrderDetailAuthMapper } from './mapper/order-detail-auth';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { ProductsModule } from '../products/products.module';
     OrdersRepository,
     OrdersService,
     OrderDetailMapper,
+    // OrderDetailAuthMapper,
     OrderDetailsRepository,
     OrderDetailsService,
   ],

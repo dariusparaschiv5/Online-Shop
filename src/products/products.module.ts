@@ -17,6 +17,7 @@ import { StockMapper } from './mapper/stock.mapper';
 import { StocksService } from './service/stocks.service';
 import { LocationsRepository } from './repository/locations.repository';
 import { LocationsService } from './service/locations.service';
+import { ProductAuthMapper } from './mapper/product-auth-mapper';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { LocationsService } from './service/locations.service';
     ProductCategoriesService,
     ProductsRepository,
     ProductMapper,
+    ProductAuthMapper,
     ProductsService,
     StocksRepository,
     StockMapper,

@@ -15,11 +15,14 @@ export class ProductsRepository {
   }
 
   async findOne(id: string): Promise<Product | null> {
-    return this.productRepository.findOneBy({ id });
+    return this.productRepository.findOne({
+      where: { id },
+      relations: ['category'],
+    });
   }
 
-  async findAll(): Promise<Product[]> {
-    return this.productRepository.find();
+  async findAll(_p0: { relations: string[] }): Promise<Product[]> {
+    return await this.productRepository.find(_p0);
   }
 
   async update(id: string, product: Product): Promise<Product> {
@@ -29,6 +32,6 @@ export class ProductsRepository {
   }
 
   async remove(id: string): Promise<void> {
-    this.productRepository.delete(id);
+    await this.productRepository.delete(id);
   }
 }

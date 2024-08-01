@@ -49,6 +49,8 @@ export class Product {
   @ManyToOne(() => ProductCategory, (category) => category.products)
   category: ProductCategory;
 
-  @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.product)
+  @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.product, {
+    cascade: ['remove'],
+  })
   orderDetails: OrderDetail[];
 }

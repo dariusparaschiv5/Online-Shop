@@ -7,4 +7,16 @@ export class OrderDetailDTO {
   product: ProductDTO;
   location: LocationDTO;
   quantity: number;
+
+  constructor(
+    order: OrderDTO,
+    product: ProductDTO,
+    shippedFrom: LocationDTO,
+    quantity: number,
+  ) {
+    this.order = order;
+    this.product = product;
+    this.location = shippedFrom;
+    this.quantity = quantity;
+  }
 }

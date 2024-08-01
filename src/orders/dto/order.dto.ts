@@ -1,5 +1,4 @@
 import { CustomerDTO } from '../../customers/dto/customer.dto';
-import { OrderDetailDTO } from './order-detail.dto';
 
 export class OrderDTO {
   customer: CustomerDTO;
@@ -8,5 +7,20 @@ export class OrderDTO {
   city: string;
   county: string;
   streetAdress: string;
-  orderDetails: OrderDetailDTO[];
+
+  constructor(
+    customer: CustomerDTO,
+    createdAt: Date,
+    addressCountry: string,
+    addressCity: string,
+    addressCounty: string,
+    addressStreet: string,
+  ) {
+    this.customer = customer;
+    this.createdAt = createdAt;
+    this.country = addressCountry;
+    this.city = addressCity;
+    this.county = addressCounty;
+    this.streetAdress = addressStreet;
+  }
 }

@@ -20,12 +20,17 @@ export class ProductsService {
     return this.productRepository.create(product);
   }
 
-  findAllProducts() {
-    return this.productRepository.findAll();
+  async findAllProducts() {
+    return await this.productRepository.findAll({ relations: ['category'] });
   }
 
-  findProductById(id: string) {
-    return this.productRepository.findOne(id);
+  async findProductById(id: string) {
+    try {
+      const product = await this.productRepository.findOne(id);
+      return product;
+    } catch (error) {
+      throw new Error('Error fetching product');
+    }
   }
 
   updateProduct(id: string, newProduct: Product) {
@@ -36,7 +41,7 @@ export class ProductsService {
     return this.productRepository.update(id, newProduct);
   }
 
-  removeProduct(id: string) {
-    this.productRepository.remove(id);
+  async removeProduct(id: string) {
+    return await this.productRepository.remove(id);
   }
 }

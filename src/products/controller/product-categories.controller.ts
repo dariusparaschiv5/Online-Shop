@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -17,8 +18,8 @@ import { Roles } from '../../auth/decorators/roles.decorator';
 import { JwtGuard } from '../../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../../auth/guards/roles.guard';
 
-@Roles()
-@UseGuards(JwtGuard, RolesGuard)
+// @Roles()
+// @UseGuards(JwtGuard, RolesGuard)
 @ApiTags('product-categories')
 @ApiBearerAuth()
 @Controller('product-categories')

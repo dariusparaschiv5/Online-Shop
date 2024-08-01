@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CreateOrderDetailDTO } from './create-order-detail.dto';
+import { OrderDetail } from '../domain/order-detail.domain';
 
 export class CreateOrderDTO {
   @ApiProperty()
@@ -21,5 +21,21 @@ export class CreateOrderDTO {
   readonly streetAdress: string;
 
   @ApiProperty()
-  orderDetails: CreateOrderDetailDTO[];
+  orderDetails: OrderDetail[];
+
+  constructor(
+    customerId: string,
+    country: string,
+    city: string,
+    county: string,
+    streetAdress: string,
+    createdAt: Date,
+  ) {
+    this.customerId = customerId;
+    this.country = country;
+    this.city = city;
+    this.county = county;
+    this.streetAdress = streetAdress;
+    this.createdAt = createdAt;
+  }
 }
