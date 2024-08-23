@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Product } from '../domain/product.domain';
 import { ProductsRepository } from '../repository/products.repository';
 import { ProductCategoriesService } from './product-categories.service';
@@ -14,9 +14,9 @@ export class ProductsService {
     const category = this.productCategoriesService.findProductCategoryById(
       product.category.id,
     );
-    if (!category) {
-      throw new NotFoundException(`ProductCategory not found`);
-    }
+    // if (!category) {
+    //   throw new NotFoundException(`ProductCategory not found`);
+    // }
     return this.productRepository.create(product);
   }
 

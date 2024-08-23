@@ -21,6 +21,10 @@ import { RolesGuard } from '../../auth/guards/roles.guard';
 import { JwtGuard } from '../../auth/guards/jwt-auth.guard';
 import { ProductAuthDTO } from '../dto/product-auth.dto';
 import { ProductAuthMapper } from '../mapper/product-auth-mapper';
+import { ProductCategory } from '../domain/product-category.domain';
+import { Product } from '../domain/product.domain';
+import { ProductCategoriesService } from '../service/product-categories.service';
+import { UpdateProductDTO } from '../dto/update-product.dto';
 
 @ApiTags('products')
 // @ApiBearerAuth()
@@ -30,6 +34,7 @@ export class ProductsController {
     private readonly productsService: ProductsService,
     private readonly productMapper: ProductMapper,
     private readonly productAuthMapper: ProductAuthMapper,
+    private readonly productCategoriesService: ProductCategoriesService,
   ) {}
 
   // @Roles(Role.ADMIN)
@@ -39,12 +44,13 @@ export class ProductsController {
     status: 201,
     description: 'The product has been successfully created.',
   })
-  @ApiResponse({ status: 403, description: 'Forbidden.' })
-  async create(
-    @Body() createProductDTO: CreateProductDTO,
-  ): Promise<ProductDTO> {
-    return this.productsService.createProduct(
-      this.productMapper.toDomain(createProductDTO),
+  async create(@Body() createProductDTO: CreateProductDTO): Promise<Product> {
+    const productCategory: ProductCategory =
+      await this.productCategoriesService.findProductCategoryById(
+        createProductDTO.categoryId,
+      );
+    return await this.productsService.createProduct(
+      ProductMapper.createDTOToEntity(createProductDTO, productCategory),
     );
   }
 
@@ -89,9 +95,30 @@ export class ProductsController {
     @Param('id') id: string,
     @Body() newProduct: CreateProductDTO,
   ): Promise<ProductDTO> {
-    const product = this.productMapper.toDomain(newProduct);
-    return this.productsService.updateProduct(id, product);
+    const productCategory: ProductCategory =
+      await this.productCategoriesService.findProductCategoryById(
+        newProduct.categoryId,
+      );
+    return await this.productsService.updateProduct(
+      id,
+      ProductMapper.updateDTOToEntity(newProduct, productCategory),
+    );
   }
+  // async update(
+  //   @Param('id') id: string,
+  //   @Body() updateProductDTO: UpdateProductDTO,
+  // ): Promise<Product> {
+  //   console.log('aaaaaaa');
+  //   const productCategory: ProductCategory =
+  //     await this.productCategoriesService.findProductCategoryById(
+  //       updateProductDTO.category,
+  //     );
+  //   console.log(productCategory.name);
+  //   return await this.productsService.updateProduct(
+  //     id,
+  //     ProductMapper.updateDTOToEntity(updateProductDTO, productCategory),
+  //   );
+  // }
 
   // @Roles(Role.ADMIN)
   // @UseGuards(JwtGuard, RolesGuard)

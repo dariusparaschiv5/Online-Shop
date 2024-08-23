@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { OrdersRepository } from '../repository/orders.repository';
 import { Order } from '../domain/order.domain';
 import { CustomersService } from '../../customers/service/customers.service';
@@ -83,7 +79,6 @@ export class OrdersService {
 
     await Promise.all(
       orderProducts.map(async (orderProduct) => {
-        console.log('finding stock', orderProduct);
         const stock: Stock = await this.stockService.findOne(
           orderProduct.locationId,
           orderProduct.productId,

@@ -29,15 +29,19 @@ export class AuthService {
       customer.username,
       customer.password,
     );
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...customerData } = customer;
-    const payload = { sub: customer.id, role: valid.role };
-
-    return {
-      ...customerData,
-      accessToken: this.jwtService.sign(payload),
-      refreshToken: this.jwtService.sign(payload, { expiresIn: '7d' }),
-    };
+    if (valid) {
+      const payload = { sub: customer.id, role: valid.role };
+      return {
+        user: {
+          id: valid.id,
+          username: valid.username,
+          role: valid.role, // Explicitly send the user role
+        },
+        accessToken: this.jwtService.sign(payload),
+        refreshToken: this.jwtService.sign(payload, { expiresIn: '7d' }),
+      };
+    }
+    throw new Error('Authentication failed');
   }
 
   async refrehToken(customer: Customer) {

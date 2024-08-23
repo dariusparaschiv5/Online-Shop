@@ -53,4 +53,22 @@ export class Product {
     cascade: ['remove'],
   })
   orderDetails: OrderDetail[];
+
+  constructor(
+    name: string,
+    description: string,
+    price: number,
+    weight: number,
+    supplier: string,
+    imageUrl: string,
+    category: ProductCategory,
+  ) {
+    this.name = name;
+    this.description = description;
+    this.price = price;
+    this.weight = weight;
+    this.supplier = supplier;
+    this.imageUrl = imageUrl;
+    this.category = category;
+  }
 }

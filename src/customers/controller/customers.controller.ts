@@ -46,12 +46,24 @@ export class CustomersController {
     return customers.map((customer) => this.customerMapper.toDTO(customer));
   }
 
-  @Get(':id')
+  @Get('/by-id/:id')
   @ApiResponse({ status: 200, description: 'Customer retrieved successfully.' })
   @ApiResponse({ status: 404, description: 'Customer not found.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async findOne(@Param('id') id: string): Promise<CustomerDTO | null> {
     const customer = await this.customersService.findCustomerById(id);
+    return this.customerMapper.toDTO(customer);
+  }
+
+  @Get('/by-username/:username')
+  @ApiResponse({ status: 200, description: 'Customer retrieved successfully.' })
+  @ApiResponse({ status: 404, description: 'Customer not found.' })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  async findOneByUsername(
+    @Param('username') username: string,
+  ): Promise<CustomerDTO | null> {
+    const customer =
+      await this.customersService.findCustomerByUsername(username);
     return this.customerMapper.toDTO(customer);
   }
 }
